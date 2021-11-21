@@ -20,6 +20,7 @@
     "react-native-numeric-input": "^1.9.0",
     "react-native-vector-icons": "^9.0.0",
     "react-redux": "^7.2.6",
+    "react-router": "^6.0.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "redux": "^4.1.2",
