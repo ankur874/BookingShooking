@@ -40,7 +40,6 @@ const RoomEditor = () => {
   const [type3, setType3] = useState([]);
   const [type4, setType4] = useState([]);
   const finalData=[];
-
   const { table1, table2, table3, table4 } = useParams();
 
   for (var i = 0; i < table1; i++) {
@@ -61,7 +60,7 @@ const RoomEditor = () => {
       {type1.map((ele) => {
         return (
           <Draggable onStop={()=>{
-             
+                  
           }}>
             <div className=" absolute top-2  right-0 w-28  h-28  ">
               <img height="220" width="220" src={table_1} />
@@ -96,6 +95,7 @@ const RoomEditor = () => {
           </Draggable>
         );
       })}
+     
     </div>
   );
 };
