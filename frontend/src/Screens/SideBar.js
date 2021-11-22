@@ -173,7 +173,7 @@ export default function SideBar() {
             </a>
             <a
               class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              href="#"
+              href="/map"
             >
               <i className="fas text-2xl fa-map-marker-alt"></i>
               <div className="w-2"></div>
@@ -182,7 +182,7 @@ export default function SideBar() {
 
             <a
               class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              href="#"
+              href=""
             >
               <svg
                 class="w-6 h-6 stroke-current"

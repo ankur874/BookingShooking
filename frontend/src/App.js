@@ -9,6 +9,7 @@ import ExploreAll from "./Screens/ExploreAll";
 import RoomEditor from "./Screens/RoomEditor";
 import TableAskFromOwner from "./Screens/TableAskFromOwner";
 import SideBar from "./Screens/SideBar";
+import ExploreMap from "./Screens/ExploreMap";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             path="/roomeditor/:table1/:table2/:table3/:table4"
             element={<RoomEditor />}
           />
+            <Route path="/map" element={<ExploreMap />} />
         </Routes>
       </Router>
     </>
