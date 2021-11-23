@@ -29,9 +29,9 @@ export default function ExploreAll() {
   ];
   return (
     <div className="grid grid-cols-8 bg-gray-100">
-      {/* <div className="col-start-1 col-end-1">
+      <div className="col-start-1 col-end-1">
         <SideBar></SideBar>
-      </div> */}
+      </div>
 
       <div className="col-start-2 col-span-7">
         <div>

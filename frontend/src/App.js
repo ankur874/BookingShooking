@@ -11,13 +11,14 @@ import TableAskFromOwner from "./Screens/TableAskFromOwner";
 import SideBar from "./Screens/SideBar";
 import ExploreMap from "./Screens/ExploreMap";
 import Bookings from "./Screens/Bookings";
+import ApplicationFrom from "./Screens/ApplicationForm";
 
 function App() {
   return (
     <>
-      <div className='inline-block bg-red-600'>
+      {/* <div className='inline-block bg-red-600'>
         <SideBar />
-      </div>
+      </div> */}
 
       <Router>
         <Routes>
@@ -32,6 +33,7 @@ function App() {
           />
           <Route path="/map" element={<ExploreMap />} />
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/form" element={<ApplicationFrom/>} />
         </Routes>
       </Router>
     </>
