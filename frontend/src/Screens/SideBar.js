@@ -182,7 +182,7 @@ export default function SideBar() {
 
             <a
               class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              href=""
+              href="/bookings"
             >
               <svg
                 class="w-6 h-6 stroke-current"
@@ -221,6 +221,13 @@ export default function SideBar() {
                 />
               </svg>
               <span class="ml-2 text-sm font-medium">Account</span>
+            </a>
+            <a
+              class="flex items-center justify-center  w-full h-24 mt-1 bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
+              href="#"
+            >
+              <i class="fas fa-briefcase"></i>
+              <span class="ml-2 text-sm font-medium">Make Me Listed</span>
             </a>
           </div>
         </div>

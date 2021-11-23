@@ -10,11 +10,15 @@ import RoomEditor from "./Screens/RoomEditor";
 import TableAskFromOwner from "./Screens/TableAskFromOwner";
 import SideBar from "./Screens/SideBar";
 import ExploreMap from "./Screens/ExploreMap";
+import Bookings from "./Screens/Bookings";
 
 function App() {
   return (
     <>
-      {/* <SideBar/> */}
+      {/* <div className=''>
+        <SideBar />
+      </div> */}
+
       <Router>
         <Routes>
           <Route exact path="/" element={<HomeScreen />} />
@@ -26,7 +30,8 @@ function App() {
             path="/roomeditor/:table1/:table2/:table3/:table4"
             element={<RoomEditor />}
           />
-            <Route path="/map" element={<ExploreMap />} />
+          <Route path="/map" element={<ExploreMap />} />
+          <Route path="/bookings" element={<Bookings />} />
         </Routes>
       </Router>
     </>
