@@ -8,7 +8,7 @@ export default function ExploreAll() {
   const data = [
     {
       key: "john",
-      value: "Johnny Doe",
+      value: "John Doe",
     },
     {
       key: "jane",
