@@ -15,9 +15,9 @@ import Bookings from "./Screens/Bookings";
 function App() {
   return (
     <>
-      {/* <div className=''>
+      <div className='inline-block bg-red-600'>
         <SideBar />
-      </div> */}
+      </div>
 
       <Router>
         <Routes>
