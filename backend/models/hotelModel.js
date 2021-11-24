@@ -24,8 +24,8 @@ const hotelSchema = mongoose.Schema({
     required: true,
   },
   rooms: {
-    type: Number,
-    required: true
+    type:Number,
+    required:true
   },
   images: [String],
   parking: {
@@ -41,7 +41,8 @@ const hotelSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  coordinates: [Number]
+  coordinates: [Number],
+  booked_by :[mongoose.Schema.Types.ObjectId]
 },
   {
     toJSON: { virtuals: true },
