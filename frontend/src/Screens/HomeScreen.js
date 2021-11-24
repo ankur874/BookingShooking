@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listHotels } from '../actions/hotelActions';
 import Rating from "../Components/Rating";
 import TabsRender from "../Components/Tabs";
 import "./HomeScreen.css";
@@ -6,6 +8,14 @@ import "./HomeScreen.css";
 import SideBar from "./SideBar";
 
 export default function HomeScreen() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.hotelList);
+
+  const { hotels, loading } = data;
+  console.log(hotels.data);
+  useEffect(() => {
+    dispatch(listHotels());
+  }, [dispatch]);
   return (
     <div class="grid sm:grid-cols-1 bg-gray-100 md:grid-cols-6 ">
       <div class="sm:grid-cols-0 col-start-1 col-end-2">
@@ -55,11 +65,11 @@ export default function HomeScreen() {
           <div className="flex flex-row">
             <p class="text-xl mb-2 font-medium">Most Popular </p>
           </div>
-       
+
           <div className="grid grid-cols-2 gap-4">  {singleSmallComponent()}
-         {singleSmallComponent()}
-         {singleSmallComponent()}
-         {singleSmallComponent()}</div>
+            {singleSmallComponent()}
+            {singleSmallComponent()}
+            {singleSmallComponent()}</div>
         </div>
       </div>
 
@@ -78,30 +88,30 @@ export default function HomeScreen() {
           </div>
         </div>
         <p className="text-2xl font-semibold ml-5 ">Shikara Hotel</p>
-      
+
         <div className=''><TabsRender></TabsRender></div>
         <div class="grid-cols-3  p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
-            <div class="w-full rounded">
-              <img
-                src="https://cdn0.weddingwire.in/vendor/4505/3_2/960/jpg/img-20190208-wa0018_15_184505.jpeg"
-                alt="s"
-              />
-            </div>
-            <div class="w-full col-span-2 row-span-2 rounded">
-              <img
-                src="https://cdn0.weddingwire.in/vendor/4505/3_2/960/jpg/img-20190208-wa0028_15_184505.jpeg"
-                alt="s"
-              />
-            </div>
-            <div class="w-full rounded">
-              <img
-                src="https://cdn.venuelook.com/uploads/space_16878/1547448955_595x400.png"
-                alt="s"
-              />
-            </div>
-            
-            <button  className='w-100% bg-blue-500 col-span-3 text-3xl m-12 hover:bg-blue-600'>Book</button>
+          <div class="w-full rounded">
+            <img
+              src="https://cdn0.weddingwire.in/vendor/4505/3_2/960/jpg/img-20190208-wa0018_15_184505.jpeg"
+              alt="s"
+            />
           </div>
+          <div class="w-full col-span-2 row-span-2 rounded">
+            <img
+              src="https://cdn0.weddingwire.in/vendor/4505/3_2/960/jpg/img-20190208-wa0028_15_184505.jpeg"
+              alt="s"
+            />
+          </div>
+          <div class="w-full rounded">
+            <img
+              src="https://cdn.venuelook.com/uploads/space_16878/1547448955_595x400.png"
+              alt="s"
+            />
+          </div>
+
+          <button className='w-100% bg-blue-500 col-span-3 text-3xl m-12 hover:bg-blue-600'>Book</button>
+        </div>
       </div>
     </div>
   );
@@ -109,7 +119,7 @@ export default function HomeScreen() {
 
 function singleLargeComponent() {
   return (
-  
+
     <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
       <Rating />
       <img
@@ -141,7 +151,7 @@ function singleSmallComponent() {
       id="app"
       class="bg-white w-128 h-20 relative rounded shadow-md flex card text-grey-darkest"
     >
-        <Rating />
+      <Rating />
       <img
         alt="Room "
         className="w-2/5 p-1 h-full rounded-lg transition-all duration-75  transform  hover:scale-110"
