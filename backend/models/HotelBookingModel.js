@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Hotel_Bookings = mongoose.Schema({
+const hotelBookingSchema = mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -17,5 +17,6 @@ const Hotel_Bookings = mongoose.Schema({
     required: true,
   },
 });
+const HotelBooking = mongoose.model("HotelBooking", hotelBookingSchema);
 
-module.exports = Hotel_Bookings;
+module.exports = HotelBooking;

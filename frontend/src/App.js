@@ -14,6 +14,7 @@ import Bookings from "./Screens/Bookings";
 import ApplicationFrom from "./Screens/ApplicationForm";
 import HotelOverview from "./Screens/HotelOverview";
 
+
 function App() {
   return (
     <>
@@ -33,8 +34,8 @@ function App() {
             element={<RoomEditor />}
           />
           <Route path="/map" element={<ExploreMap />} />
-          <Route path="/bookings" element={<HotelOverview />} />
-          <Route path="/form" element={<ApplicationFrom/>} />
+          <Route path="/bookings" element={<Bookings />} />
+          <Route path="/form" element={<ApplicationFrom />} />
         </Routes>
       </Router>
     </>
