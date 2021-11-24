@@ -152,32 +152,43 @@ const hotel_bookings = asyncHandler(async(req,res) => {
     const hotel = await Hotel.findById(req.body.hotel_id);
 
     if(user && hotel){
-      const {user_id,hotel_id,booked_rooms} = req.body;
+      const {user_id,hotel_id,type1,type2,type3} = req.body;
 
-      user.hotel_bookings.push(hotel_id);            
-      hotel.rooms -= booked_rooms;
-      hotel.booked_by.push(user_id);
+        if((type1+type2+type3)<=hotel.rooms){
 
-      const updatedUser = await user.save();
-      const updatedHotel = await hotel.save();
+            user.hotel_bookings.push(hotel_id);            
+            hotel.rooms -= (type1+type2+type3);
+            hotel.booked_by.push(user_id);
 
-      const booking = await Hotel_Bookings.create({
-        user_id,
-        hotel_id,
-        booked_rooms,
-      });
+            const updatedUser = await user.save();
+            const updatedHotel = await hotel.save();
 
-      res.status(201).json({
-          user_id: booking.user_id,
-          hotel_id: booking.hotel_id,
-          booked_rooms: booking.booked_rooms,
-      });
+            const booking = await Hotel_Bookings.create({
+              user_id,
+              hotel_id,
+              type1,
+              type2,
+              type3
+            });
 
-      }else{
-        res.status(404);
-        if(user)throw new Error('Hotel Not Found');
-        else throw new Error('User Not Found');
-      }
+            res.status(201).json({
+                user_id: booking.user_id,
+                hotel_id: booking.hotel_id,
+                type1: booking.type1,
+                type2:booking.type2,
+                type3:booking.type3
+            });
+            
+        }else{
+            res.status(404);
+            throw new Error('Sorry! You exceeded the Maximum Number Of Available Rooms')
+        }
+
+    }else{
+      res.status(404);
+      if(user)throw new Error('Hotel Not Found');
+      else throw new Error('User Not Found');
+    }
 
 });
 
