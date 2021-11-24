@@ -1,8 +1,9 @@
 import React from "react";
 
-const Product3 = () => {
+const HotelOverview = () => {
     return (
         <>
+       
             <div className="flex flex-row justify-between ml-5 mt-2 mb-2">
                 <div>
                     <h1
@@ -160,4 +161,4 @@ const Product3 = () => {
     );
 };
 
-export default Product3;
+export default HotelOverview;

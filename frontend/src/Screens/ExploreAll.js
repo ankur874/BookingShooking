@@ -2,6 +2,8 @@ import { useState } from "react";
 import Rating from "../Components/Rating";
 import SideBar from "./SideBar";
 import ReactSearchBox from "react-search-box";
+import DropDown from "../Components/dropdown";
+import Slider from "../Components/slider";
 
 export default function ExploreAll() {
   const [showHotels, setHotels] = useState(false);
@@ -126,22 +128,51 @@ export default function ExploreAll() {
 }
 function Hotels() {
   console.log("hotelss");
-  return <div>Hotels</div>;
+  return (
+    <>
+      <div className=" flex flex-row justify-evenly   items-center ">
+        <div className="flex-col flex  justify-start  items-start w-1/4">
+         
+          <input
+            className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0 border rounded-full shadow-sm   cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2"
+            type="date"
+            placeholder="Jul 14 - Jul 16"
+          />
+        </div>
+        <div className='w-52  px-5 bg-white ml-0 border rounded-full shadow-sm   cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2'>
+          <Slider />
+        </div>
+
+        <DropDown />
+        <i className="fas hover:scale-110 transition-all hover:rotate-90 active:scale-105  transform text-3xl fa-arrow-circle-right"></i>
+      </div>
+      <div className="grid  justify-items-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-cols-1 py-14 gap-4 ">
+        {singleComponent()}
+        {singleComponent()}
+        {singleComponent()}
+        {singleComponent()}
+        {singleComponent()}
+        {singleComponent()}
+        {singleComponent()}
+        {singleComponent()}
+      </div>
+    </>
+  );
 }
 function Restaurants() {
   console.log("resssssssss");
   return (
     <>
-      <div className=" flex flex-row justify-evenly  items-center ">
+      <div className=" flex flex-row justify-center  items-center ">
         <div className="flex-col flex  justify-start  items-start w-1/4">
-          <div className="font-bold text-gray-700">Book on</div>
           <input
-            className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0"
+            className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0 border rounded-full shadow-sm   cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2"
             type="date"
             placeholder="Jul 14 - Jul 16"
           />
         </div>
-        <i className="fas hover:scale-150 text-3xl fa-arrow-circle-right"></i>
+    
+        <i className="fas hover:scale-110 transition-all hover:rotate-90 active:scale-105  transform text-3xl fa-arrow-circle-right"></i>
       </div>
       <div className="grid  justify-items-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-cols-1 py-14 gap-4 ">
         {singleComponent()}

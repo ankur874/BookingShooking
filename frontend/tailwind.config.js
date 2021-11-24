@@ -6,7 +6,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      scale: ["responsive", "hover", "focus"],
+      scale: ["responsive", "hover", "focus","active"],
       accessibility: ["responsive", "focus-within", "focus"],
       alignContent: ["responsive"],
       alignItems: ["responsive"],
@@ -33,6 +33,7 @@ module.exports = {
         "focus-within",
         "hover",
         "focus",
+        "active"
       ],
       backgroundImage: ["responsive"],
       backgroundOpacity: [
@@ -75,6 +76,7 @@ module.exports = {
         "focus-within",
         "hover",
         "focus",
+        "active",
       ],
       boxSizing: ["responsive"],
       brightness: ["responsive"],

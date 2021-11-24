@@ -229,6 +229,20 @@ export default function SideBar() {
               <i class="fas fa-briefcase"></i>
               <span class="ml-2 text-sm font-medium">Make Me Listed</span>
             </a>
+            <a
+              class="flex items-center justify-center  w-full h-24 mt-1 bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
+              href="/login"
+            >
+              <i class="fas fa-briefcase"></i>
+              <span class="ml-2 text-sm font-medium">Login</span>
+            </a>
+            <a
+              class="flex items-center justify-center  w-full h-24 mt-1 bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
+              href="/signup"
+            >
+              <i class="fas fa-briefcase"></i>
+              <span class="ml-2 text-sm font-medium">Sign up</span>
+            </a>
           </div>
         </div>
       </div>

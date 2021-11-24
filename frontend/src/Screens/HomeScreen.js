@@ -30,7 +30,8 @@ export default function HomeScreen() {
               className="placeholder-gray-500 ml-0 p-2 bg-white"
               placeholder="Location"
             ></input>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            <button class="bg-blue-500 hover:bg-blue-700 hover:scale-110 transform transition-all active:scale-105 hover:shadow-md active:shadow-sm
+             text-white font-bold py-2 px-4 rounded-full">
               Search
             </button>
           </div>
