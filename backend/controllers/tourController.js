@@ -21,9 +21,8 @@ exports.getAllHotels = async (req, res, next) => {
     const hotels = await Hotel.find();
     res.status(201).json({
       status: "Success",
-      data: {
-        hotel: hotels
-      }
+      data: hotels
+      
     })
   } catch (err) {
     res.status(500).json({
