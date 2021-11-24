@@ -15,7 +15,7 @@ export default function HomeScreen() {
   console.log(hotels.data);
   useEffect(() => {
     dispatch(listHotels());
-  }, [dispatch]);
+  }, []);
   return (
     <div class="grid sm:grid-cols-1 bg-gray-100 md:grid-cols-6 ">
       <div class="sm:grid-cols-0 col-start-1 col-end-2">
