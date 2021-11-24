@@ -13,6 +13,7 @@ import ExploreMap from "./Screens/ExploreMap";
 import Bookings from "./Screens/Bookings";
 import ApplicationFrom from "./Screens/ApplicationForm";
 
+
 function App() {
   return (
     <>
@@ -33,7 +34,7 @@ function App() {
           />
           <Route path="/map" element={<ExploreMap />} />
           <Route path="/bookings" element={<Bookings />} />
-          <Route path="/form" element={<ApplicationFrom/>} />
+          <Route path="/form" element={<ApplicationFrom />} />
         </Routes>
       </Router>
     </>
