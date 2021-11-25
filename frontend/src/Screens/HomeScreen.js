@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listHotels } from "../actions/hotelActions";
+import { listRestaurants } from "../actions/restaurantActions";
 import Rating from "../Components/Rating";
 import TabsRender from "../Components/Tabs";
 import "./HomeScreen.css";
@@ -14,17 +15,19 @@ export default function HomeScreen() {
 
   const { hotels, loading } = data;
   const { restaurants, loading1 } = data1;
-  let mainData = [];
-  // console.log("sdfsdfdsf",restaurants.data);
-  if (loading === false) {
-    mainData = { ...hotels.data };
-    console.log(mainData, "vdfvdfv");
-  }
+  const userLogin = useSelector((state) => state.userLogin);
+  const {userInfo, error } = userLogin;
+  
+  if(restaurants.data!=null){
+    console.log(data1.restaurants.data[0].name,"res");
 
+  }
+  // console.log(userInfo, "vdfvdfv");
   useEffect(() => {
     dispatch(listHotels());
-  }, []);
-  if (loading === true) {
+    dispatch(listRestaurants());
+  }, [dispatch]);
+  if (hotels.data == null) {
     return <div>loading</div>;
   } else {
     return (
@@ -34,7 +37,7 @@ export default function HomeScreen() {
         </div>
 
         <div class="col-start-2 mt-5  col-span-3">
-          <p className="text-2xl font-semibold">Bookings that matters</p>
+          <p className="text-2xl font-semibold">Booking That Matters</p>
           <div class="flex flex-row my-5">
             <div class="sm:grid-cols-1">
               <p class="text-xl font-medium">Date</p>
@@ -69,7 +72,7 @@ export default function HomeScreen() {
             </div>
 
             <div className="grid grid-cols-3  gap-5">
-              <div className="hover:scale-110">{singleLargeComponent(mainData)}</div>
+              <div className="hover:scale-110">{singleLargeComponent()}</div>
               {/* <div>{singleLargeComponent()}</div>
               <div>{singleLargeComponent()}</div> */}
             </div>
@@ -93,13 +96,14 @@ export default function HomeScreen() {
           <div className="flex flex-row items-center mb-2 justify-evenly bg-gray-700 p-8">
             <img
               class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
-              src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png"
               alt=""
             />
+            
             <div>
-              <p className="font-semibold text-white text-base">Lorem Epsum </p>
+              <p className="font-semibold text-white text-base">{userInfo==null?"Please Login":userInfo.name}</p>
               <p className="font-semibold text-sm text-white">
-                Lorem ipsum dolor sit
+              {userInfo==null?"":userInfo.email}
               </p>
             </div>
           </div>
@@ -138,7 +142,7 @@ export default function HomeScreen() {
   }
 }
 
-function singleLargeComponent(mainData) {
+function singleLargeComponent() {
   return (
     <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
       <Rating />
@@ -148,15 +152,15 @@ function singleLargeComponent(mainData) {
         alt="Mountain"
       />
       <div class="px-2  py-1">
-        <p class=" text-md font-bold mb-2">{mainData[0].title}</p>
+        <p class=" text-md font-bold mb-2">mainData[0].title</p>
         <div class="flex flex-row ">
           <i class="fas text-blue-400 fa-map-marker-alt"></i>
-          <p class="text-sm text-gray-400 pl-2">{mainData[0].address}</p>
+          <p class="text-sm text-gray-400 pl-2">mainData[0].title</p>
         </div>
         <div>
           <p class="text-xl mt-1 font-bold">
             <i class="fas fa-dollar-sign"></i>
-            {mainData[0].pricePerNight}
+            mainData[0].title
             <span class="text-sm text-gray-400 inline-block align-baseline">
               /night
             </span>

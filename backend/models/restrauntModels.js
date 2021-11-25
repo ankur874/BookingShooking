@@ -5,6 +5,10 @@ const RestrauntSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  description:{
+    type:String,
+    required:true
+  },
   location: {
     type: String,
     required: true,
@@ -21,13 +25,8 @@ const RestrauntSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  Timimgs: {
-    type: String,
-    required: true,
-  },
   images: [String],
   reviews: [],
-  Restraunt_features: [],
   coordinates: [Number],
   booked_by: [mongoose.Schema.Types.ObjectId],
 });

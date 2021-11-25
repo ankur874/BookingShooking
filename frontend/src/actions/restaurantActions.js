@@ -18,6 +18,24 @@ const listRestaurants = () => async (dispatch) => {
     });
   }
 };
+const createRestaurant = (restraunt) => async (dispatch) => {
+  try {
+    dispatch({ type: actions.RESTAURANT_CREATE_REQUEST });
+
+    const { data } = await axios.post(`/api/restraunts/`,restraunt);
+
+    dispatch({
+      type: actions.RESTAURANT_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.RESTAURANT_CREATE_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
 
 
-export { listRestaurants };
+export { listRestaurants,createRestaurant };
+

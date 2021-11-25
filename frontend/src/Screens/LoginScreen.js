@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "./SideBar";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../actions/userActions";
+// import LinkButton from "../Components/LinkButton";
 
 export default function LoginScreen() {
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
-  function onClick(){
-    
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, userInfo, error } = userLogin;
+  console.log("error", error);
+  const navigate = useNavigate();
+  console.log("fssfg", userLogin);
+  const dispatch = useDispatch();
+
+  function loginhandler(e) {
+    e.preventDefault();
+    dispatch(login(email, password));
+  }
+  if (userInfo != null) {
+    navigate("/");
   }
   return (
     <div className="grid grid-cols-8">
@@ -37,7 +52,7 @@ export default function LoginScreen() {
                   id="email"
                   type="email"
                   value={email}
-                  onInput={e => setEmail(e.target.value)}
+                  onInput={(e) => setEmail(e.target.value)}
                   name="email"
                   placeholder="e-mail address"
                   autocomplete="email"
@@ -58,7 +73,7 @@ export default function LoginScreen() {
                   type="password"
                   name="password"
                   value={password}
-                  onInput={e=>setPassword(e.target.value)}
+                  onInput={(e) => setPassword(e.target.value)}
                   placeholder="password"
                   autocomplete="current-password"
                   className="block w-full py-3 px-1 mt-2 mb-4
@@ -70,6 +85,7 @@ export default function LoginScreen() {
 
                 <button
                   type="submit"
+                  onClick={(e) => loginhandler(e)}
                   className="w-full py-3 mt-10 bg-gray-800 rounded-sm
                     font-medium text-white uppercase
                     focus:outline-none hover:bg-gray-700 hover:shadow-none"

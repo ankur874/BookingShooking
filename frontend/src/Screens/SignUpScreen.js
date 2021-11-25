@@ -1,17 +1,34 @@
 import React, { useState } from "react";
-import Sidebar from './SideBar';
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router";
+import { register } from "../actions/userActions";
+import { useNavigate } from "react-router-dom";
+import Sidebar from "./SideBar";
 
 export default function SignUpScreen() {
-  const [name,setName]=useState("");
-  const [email,setEmail]=useState("");
-  const [firstPassword,setFirstPassword]=useState("");
-  const [secondPassword,setSecondPassword]=useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstPassword, setFirstPassword] = useState("");
+  const [secondPassword, setSecondPassword] = useState("");
+  const navigate = useNavigate();
+  const userLogin = useSelector((state) => state.userLogin);
+  console.log("fssfg", userLogin);
+  const dispatch = useDispatch();
+
+  function signUphandler(e) {
+    e.preventDefault();
+    dispatch(register(name, email, firstPassword));
+  }
+  if (userLogin.userInfo != null) {
+    navigate("/");
+  }
+
   return (
     <div className="grid grid-cols-8">
       <div className="col-start-1 col-end-1">
         <Sidebar></Sidebar>
       </div>
-     
+
       <div className="col-start-2 col-span-7">
         <div className="flex flex-col h-screen bg-indigo-500 shadow-lg">
           <div className="grid place-items-center mx-2 my-20 sm:my-auto">
@@ -36,7 +53,7 @@ export default function SignUpScreen() {
                   type="text"
                   name="text"
                   value={name}
-                  onInput={e=>setName(e.target.value)}
+                  onInput={(e) => setName(e.target.value)}
                   placeholder="name"
                   autocomplete="text"
                   className="block w-full py-3 px-1 mt-2 
@@ -57,7 +74,7 @@ export default function SignUpScreen() {
                   type="email"
                   name="email"
                   value={email}
-                  onInput={e=>setEmail(e.target.value)}
+                  onInput={(e) => setEmail(e.target.value)}
                   placeholder="e-mail address"
                   autocomplete="email"
                   className="block w-full py-3 px-1 mt-2 
@@ -79,7 +96,7 @@ export default function SignUpScreen() {
                   name="password"
                   placeholder="password"
                   value={firstPassword}
-                  onInput={e=>setFirstPassword(e.target.value)}
+                  onInput={(e) => setFirstPassword(e.target.value)}
                   autocomplete="current-password"
                   className="block w-full py-3 px-1 mt-2 mb-4
                     text-gray-800 appearance-none 
@@ -99,7 +116,7 @@ export default function SignUpScreen() {
                   type="password"
                   name="password"
                   value={secondPassword}
-                  onInput={e=>setSecondPassword(e.target.value)}
+                  onInput={(e) => setSecondPassword(e.target.value)}
                   placeholder="confirm password"
                   autocomplete="current-password"
                   className="block w-full py-3 px-1 mt-2 mb-4
@@ -111,6 +128,7 @@ export default function SignUpScreen() {
 
                 <button
                   type="submit"
+                  onClick={(e) => signUphandler(e)}
                   className="w-full py-3 mt-5 bg-gray-800 rounded-sm
                     font-medium text-white uppercase
                     focus:outline-none hover:bg-gray-700 hover:shadow-none"

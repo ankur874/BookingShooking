@@ -5,12 +5,12 @@ const restaurantReducer = (state = { restaurants: [] }, action) => {
     case actions.RESTAURANT_LIST_REQUEST:
       return {
         loading: true,
-        hotels: [],
+        restaurants: [],
       };
     case actions.RESTAURANT_LIST_SUCCESS:
       return {
         loading: false,
-        hotels: action.payload,
+        restaurants: action.payload,
       };
     case actions.RESTAURANT_LIST_FAIL:
       return {
@@ -22,4 +22,25 @@ const restaurantReducer = (state = { restaurants: [] }, action) => {
   }
 };
 
-export { restaurantReducer };
+const createRestaurantReducer = (state = { }, action) => {
+  switch (action.type) {
+    case actions.RESTAURANT_CREATE_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.RESTAURANT_CREATE_SUCCESS:
+      return {
+        loading: false,
+        restaurant: action.payload,
+      };
+    case actions.RESTAURANT_CREATE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export { restaurantReducer ,createRestaurantReducer};
