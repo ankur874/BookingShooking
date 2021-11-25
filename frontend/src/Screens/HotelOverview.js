@@ -1,9 +1,26 @@
 import React from "react";
+import axios from "axios";
+import StripeCheckout from "react-stripe-checkout";
+import { toast } from "react-toastify";
 
 const HotelOverview = () => {
+    const handleToken = async (token, addresses) => {
+        const response = await axios.post(
+            "/checkout",
+            { token }
+        );
+
+        const { status } = response.data;
+        console.log("Response:", response.data);
+        if (status === "success") {
+            toast("Success! Check email for details", { type: "success" });
+        } else {
+            toast("Something went wrong", { type: "error" });
+        }
+    }
     return (
         <>
-       
+
             <div className="flex flex-row justify-between ml-5 mt-2 mb-2">
                 <div>
                     <h1
@@ -26,16 +43,16 @@ const HotelOverview = () => {
                     <p className=" fa fa-star text-4xl bg-green">&nbsp;4.0</p>
                 </div>
             </div>
-        <div className="md:flex items-star py-3 2xl:px-20 md:px-6 px-2">
-            <div className="relative xl:w-1/2 lg:w-1/2 flex-row ml-5 w-80 flex flex-row md:block hidden">
-                
-                <img className="w-full rounded" alt="img of a girl posing" src="https://pix8.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?s=1024x768" />
-                <img className="mt-2 w-full rounded" alt="img of a girl posing" src="https://www.itchotels.com/content/dam/itchotels/in/umbrella/images/offers/offer-primary-desktop/all-in-getaway.jpg" />
-            </div>
-            <div className="xl:w-3/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
-                <div className="mt-4 pb-2">
-                    <h1
-                        className="
+            <div className="md:flex items-star py-3 2xl:px-20 md:px-6 px-2">
+                <div className="relative xl:w-1/2 lg:w-1/2 flex-row ml-5 w-80 flex flex-row md:block hidden">
+
+                    <img className="w-full rounded" alt="img of a girl posing" src="https://pix8.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?s=1024x768" />
+                    <img className="mt-2 w-full rounded" alt="img of a girl posing" src="https://www.itchotels.com/content/dam/itchotels/in/umbrella/images/offers/offer-primary-desktop/all-in-getaway.jpg" />
+                </div>
+                <div className="xl:w-3/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
+                    <div className="mt-4 pb-2">
+                        <h1
+                            className="
 							lg:text-2xl
 							text-xl
 							font-semibold
@@ -44,16 +61,16 @@ const HotelOverview = () => {
 							text-gray-800
 							mt-1
 						"
-                    >
-                        Description
-                    </h1>
-                </div>
-                <div>
-                    <p className="xl:pr-20 text-base leading-normal mt-4 text-gray-600 mt-3" style={{alignSelf: 'flex-end'}}>Depth 5.1 inches dcbKBCBHBJV BLBwbvbvkv bwhbqhjfqhfl hbqfhbfhrfbhr hfbhwbfwhfblf hwbfjlbwbfhbwfbf lbve ejrqbrb erblqrjbkqber brqejkbjkre jrebgrjkegbjk jbregbjkbejrkkrgk ljrgkgerlbjerg jrgberjgergb grgbjerlbjreg lhfwbhjfjhbfhwefb whbfbhrfbhbfhbw hwrlbfhbrhfblrhfb hfbwhefelfwbeb hrwbhrehhrbwhfbheb bhjqwkbefjjf hjwfqblhbfb lweqfhbfh lhwqbfhbfhbwqhf hfqhbbfhhwebfhb whbhwbefhbwf hwbfhwbfbwlfbwebf wbfkwbfwbfbfwfb whbfhbwfhwfhf hfhbwfhbewhbfheb hwfbhebfhbrhbefwbf fwbewekbfkbe hefwbhfebwbfewb fhewbfhewbhfbewhfb</p>
-                </div>
-                <div className="pb-2 mt-12">
-                    <h1
-                        className="
+                        >
+                            Description
+                        </h1>
+                    </div>
+                    <div>
+                        <p className="xl:pr-20 text-base leading-normal mt-4 text-gray-600 mt-3" style={{ alignSelf: 'flex-end' }}>Depth 5.1 inches dcbKBCBHBJV BLBwbvbvkv bwhbqhjfqhfl hbqfhbfhrfbhr hfbhwbfwhfblf hwbfjlbwbfhbwfbf lbve ejrqbrb erblqrjbkqber brqejkbjkre jrebgrjkegbjk jbregbjkbejrkkrgk ljrgkgerlbjerg jrgberjgergb grgbjerlbjreg lhfwbhjfjhbfhwefb whbfbhrfbhbfhbw hwrlbfhbrhfblrhfb hfbwhefelfwbeb hrwbhrehhrbwhfbheb bhjqwkbefjjf hjwfqblhbfb lweqfhbfh lhwqbfhbfhbwqhf hfqhbbfhhwebfhb whbhwbefhbwf hwbfhwbfbwlfbwebf wbfkwbfwbfbfwfb whbfhbwfhwfhf hfhbwfhbewhbfheb hwfbhebfhbrhbefwbf fwbewekbfkbe hefwbhfebwbfewb fhewbfhewbhfbewhfb</p>
+                    </div>
+                    <div className="pb-2 mt-12">
+                        <h1
+                            className="
 							lg:text-2xl
 							text-xl
 							font-semibold
@@ -62,56 +79,56 @@ const HotelOverview = () => {
 							text-gray-800
 							mt-19
 						"
-                    >
-                        Facilities
-                    </h1>
-                </div>
-                <div className="flex flex-row justify-between mt-4 ml-3 p-1">
-                    <div className="border border-gray-600 px-6">
-                        <i className="p-2 fas fa-tv text-4xl px-11"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">TV</p>
+                        >
+                            Facilities
+                        </h1>
                     </div>
-                    <div className="border border-gray-600 px-6">
-                        <i className="p-2 fas fa-fan text-4xl px-11"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">AC</p>
+                    <div className="flex flex-row justify-between mt-4 ml-3 p-1">
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-tv text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">TV</p>
+                        </div>
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-fan text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">AC</p>
+                        </div>
+                        <div className="border border-gray-600 px-6 mr-20">
+                            <i className="p-2 fas fa-wifi text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Free WiFi</p>
+                        </div>
                     </div>
-                    <div className="border border-gray-600 px-6 mr-20">
-                        <i className="p-2 fas fa-wifi text-4xl px-11"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Free WiFi</p>
+                    <div className="flex flex-row justify-between ml-3 p-1">
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-hot-tub text-4xl px-12"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Geyser</p>
+                        </div>
+
+                        <div className="border border-gray-600 px-6 ">
+                            <i className="p-2 fas fa-parking text-4xl px-12"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Parking</p>
+                        </div>
+                        <div className="border border-gray-600 px-6 mr-20">
+                            <i className="p-2 fas fa-glass-martini-alt text-4xl px-12"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Kitchen</p>
+                        </div>
                     </div>
-                </div>
-                <div className="flex flex-row justify-between ml-3 p-1">
-                    <div className="border border-gray-600 px-6">
-                        <i className="p-2 fas fa-hot-tub text-4xl px-12"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Geyser</p>
-                    </div>
-                    
-                    <div className="border border-gray-600 px-6 ">
-                        <i className="p-2 fas fa-parking text-4xl px-12"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Parking</p>
-                    </div>
-                    <div className="border border-gray-600 px-6 mr-20">
-                        <i className="p-2 fas fa-glass-martini-alt text-4xl px-12"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Kitchen</p>
-                    </div>
-                </div>
-                <div className="flex flex-row justify-between ml-3 p-1">
-                    <div className="border border-gray-600 px-6">
-                        <i className="p-2 fas fa-car-battery text-4xl px-12"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Backup</p>
-                    </div>
-                    <div className="border border-gray-600 px-6">
-                        <i className="p-2 fas fa-video text-4xl px-11"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">CCTV</p>
-                    </div>
-                    <div className="border border-gray-600 px-6 mr-20">
-                        <i className="p-2 fas fa-credit-card text-4xl px-11"></i>
-                        <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Card</p>
+                    <div className="flex flex-row justify-between ml-3 p-1">
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-car-battery text-4xl px-12"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Backup</p>
+                        </div>
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-video text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">CCTV</p>
+                        </div>
+                        <div className="border border-gray-600 px-6 mr-20">
+                            <i className="p-2 fas fa-credit-card text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Card</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div className="flex flex-row justify-center">
+            <div className="flex flex-row justify-center">
                 <button
                     className="
 						focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800
@@ -137,7 +154,7 @@ const HotelOverview = () => {
                     </svg>
                     Check On Map
                 </button>
-                <button
+                <div
                     className="
 						focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800
 						text-base
@@ -154,9 +171,17 @@ const HotelOverview = () => {
                         rounded
 					"
                 >
-                    Book A Room
-                </button>
+                    <StripeCheckout
+                        stripeKey="pk_test_4TbuO6qAW2XPuce1Q6ywrGP200NrDZ2233"
+                        token={handleToken}
+                        amount={1000 / 79 * 100}
+                        name="items"
+                        billingAddress
+                        shippingAddress
+                    />
                 </div>
+
+            </div>
         </>
     );
 };
