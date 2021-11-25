@@ -2,9 +2,13 @@ import { useState } from "react";
 import Rating from "../Components/Rating";
 import SideBar from "./SideBar";
 import ReactSearchBox from "react-search-box";
+import DropDown from "../Components/dropdown";
+import Slider from "../Components/slider";
+import { Link } from "react-router-dom";
 
 export default function ExploreAll() {
   const [showHotels, setHotels] = useState(false);
+  const [id, setId] = useState(0);
   const data = [
     {
       key: "john",
@@ -74,7 +78,7 @@ export default function ExploreAll() {
             </button>
           </div>
           <section className="p-3 ">
-            {showHotels ? Hotels() : Restaurants()}
+            {showHotels ? Hotels(id) : Restaurants(id)}
           </section>
         </div>
       </div>
@@ -124,62 +128,93 @@ export default function ExploreAll() {
     // </div>
   );
 }
-function Hotels() {
+function Hotels(id) {
   console.log("hotelss");
-  return <div>Hotels</div>;
-}
-function Restaurants() {
-  console.log("resssssssss");
   return (
     <>
-      <div className=" flex flex-row justify-evenly  items-center ">
+      <div className=" flex flex-row justify-evenly   items-center ">
         <div className="flex-col flex  justify-start  items-start w-1/4">
-          <div className="font-bold text-gray-700">Book on</div>
+
           <input
-            className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0"
+            className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0 border rounded-full shadow-sm   cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2"
             type="date"
             placeholder="Jul 14 - Jul 16"
           />
         </div>
-        <i className="fas hover:scale-150 text-3xl fa-arrow-circle-right"></i>
+        <div className='w-52  px-5 bg-white ml-0 border rounded-full shadow-sm   cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2'>
+          <Slider />
+        </div>
+
+        <DropDown />
+        <i className="fas hover:scale-110 transition-all hover:rotate-90 active:scale-105  transform text-3xl fa-arrow-circle-right"></i>
       </div>
       <div className="grid  justify-items-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-cols-1 py-14 gap-4 ">
-        {singleComponent()}
-        {singleComponent()}
-        {singleComponent()}
-        {singleComponent()}
-        {singleComponent()}
-        {singleComponent()}
-        {singleComponent()}
-        {singleComponent()}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
       </div>
     </>
   );
 }
-function singleComponent() {
+function Restaurants(id) {
+  console.log("resssssssss");
   return (
-    <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
-      <Rating />
-      <img
-        className="h-3/4 p-2"
-        src="https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2019-11/ISR.png"
-        alt="Mountain"
-      />
-      <div class="px-2  py-1">
-        <p class=" text-md font-bold mb-2">Shikara Hotel</p>
-        <div class="flex flex-row ">
-          <i class="fas text-blue-400 fa-map-marker-alt"></i>
-          <p class="text-sm text-gray-400 pl-2">Jl Aston No. 72 Yogyakarta</p>
+    <>
+      <div className=" flex flex-row justify-center  items-center ">
+        <div className="flex-col flex  justify-start  items-start w-1/4">
+          <input
+            className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0 border rounded-full shadow-sm   cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2"
+            type="date"
+            placeholder="Jul 14 - Jul 16"
+          />
         </div>
-        <div>
-          <p class="text-xl mt-1 font-bold">
-            <i class="fas fa-dollar-sign"></i>42
-            <span class="text-sm text-gray-400 inline-block align-baseline">
-              /night
-            </span>
-          </p>
+
+        <i className="fas hover:scale-110 transition-all hover:rotate-90 active:scale-105  transform text-3xl fa-arrow-circle-right"></i>
+      </div>
+      <div className="grid  justify-items-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-cols-1 py-14 gap-4 ">
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+        {singleComponent(id)}
+      </div>
+    </>
+  );
+}
+function singleComponent(id) {
+  return (
+    <Link to={`/explore/${id}`}>
+      <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
+        <Rating />
+        <img
+          className="h-3/4 p-2"
+          src="https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2019-11/ISR.png"
+          alt="Mountain"
+        />
+        <div class="px-2  py-1">
+          <p class=" text-md font-bold mb-2">Shikara Hotel</p>
+          <div class="flex flex-row ">
+            <i class="fas text-blue-400 fa-map-marker-alt"></i>
+            <p class="text-sm text-gray-400 pl-2">Jl Aston No. 72 Yogyakarta</p>
+          </div>
+          <div>
+            <p class="text-xl mt-1 font-bold">
+              <i class="fas fa-dollar-sign"></i>42
+              <span class="text-sm text-gray-400 inline-block align-baseline">
+                /night
+              </span>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

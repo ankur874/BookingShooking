@@ -1,58 +1,36 @@
-import React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import { Range } from "react-range";
+// import ReactSlider from "react-slider";
 
-const sliderThumbStyles = (props) => (`
-  width: 25px;
-  height: 25px;
-  background: #000000;
-  cursor: pointer;
-  outline: 3px solid #000;
-  opacity: 1;
-`);
-
-const Styles = styled.div`
-  display: flex;
-  align-items: center;
-  color: #888;
-
-  .value {
-    flex: 1;
-    font-size: 2rem;
-  }
-
-  .slider {
-    flex: 6;
-    -webkit-appearance: none;
-    height: 15px;
-    border-radius: 6px;
-    background: #efefef;
-    outline: none;
-
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      ${props => sliderThumbStyles(props)}
-    }
-
-    &::-moz-range-thumb {
-      ${props => sliderThumbStyles(props)}
-    }
-  }
-`;
-
-export default class Slider extends React.Component {
-  state = {
-    value: 50
-  }
-
-  handleOnChange = (e) => this.setState({ value: e.target.value })
-
-  render() {
-    return (
-      <Styles className="pl-20 pr-15">
-        <input type="range" min={0} max={255} value={this.state.value} className="slider" onChange={this.handleOnChange} />&nbsp;&nbsp;
-        <div className="value">{this.state.value}</div>
-      </Styles>
-    )
-  }
+export default function Slider() {
+  const [values, setValues] = React.useState([0]);
+  return (
+    <div>
+      
+      <Range
+        step={1}
+        min={0}
+        max={99}
+        values={values}
+        onChange={(values) => {
+          setValues(values);
+        }}
+        renderTrack={({ props, children }) => (
+          <div
+            {...props}
+            className="w-full h-3 pr-2 my-4 bg-gray-200 rounded-md"
+          > 
+            {children}
+            
+          </div>
+        )}
+        renderThumb={({ props }) => (
+          <div
+            {...props}
+            className="w-5 h-5 text-center transform  translate-x-10 bg-indigo-500 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >{values}</div>
+        )}
+      ></Range>
+    </div>
+  );
 }

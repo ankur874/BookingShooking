@@ -28,7 +28,7 @@ export default function TableAskFromOwner() {
   }
   return (
     <div className="bg-gray-200">
-      <div className="bg-white text-center ">
+      <div className="bg-white px-0 py-1 text-center ">
         Please select the table counter you want for your restaurant!
       </div>
       <div className="grid  gap-5 grid-cols-2">
@@ -83,7 +83,7 @@ export default function TableAskFromOwner() {
         <Link to={nextPagePath}>
           <button
             onClick={onClick}
-            className="w-screen p-2 bg-blue-600 hover:bg-blue-700 font-bold text-2xl "
+            className="w-screen p-2 absolute bottom-0 bg-blue-600 hover:bg-blue-700 font-bold text-2xl "
           >
             Double-click to set layout
           </button>

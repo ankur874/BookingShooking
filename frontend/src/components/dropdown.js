@@ -38,7 +38,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function DD() {
+export default function DropDown() {
   const [selected, setSelected] = useState(people[3])
 
   return (
@@ -46,7 +46,7 @@ export default function DD() {
       {({ open }) => (
         <>
           <div className="relative pl-20 pr-15">
-            <Listbox.Button className="relative w-full bg-blue-50 border border-gray-900 rounded-md shadow-sm pl-1 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2">
+            <Listbox.Button className="relative w-full bg-white border rounded-full shadow-sm pl-1 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm m-2">
               <span className="flex items-center p-0.5">
                 <span className="ml-3 block truncate">{selected.name}</span>
               </span>
