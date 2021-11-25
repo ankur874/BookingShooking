@@ -16,10 +16,10 @@ export default function HomeScreen() {
   const { hotels, loading } = data;
   const { restaurants, loading1 } = data1;
   const userLogin = useSelector((state) => state.userLogin);
-  const {userInfo, error } = userLogin;
-  
-  if(restaurants.data!=null){
-    console.log(data1.restaurants.data[0].name,"res");
+  const { userInfo, error } = userLogin;
+
+  if (restaurants.data != null) {
+    console.log(data1.restaurants.data[0].name, "res");
 
   }
   // console.log(userInfo, "vdfvdfv");
@@ -28,14 +28,15 @@ export default function HomeScreen() {
     dispatch(listRestaurants());
   }, [dispatch]);
   if (hotels.data == null) {
-    return <div>loading</div>;
+    return <div className="h-screen flex flex-col items-center justify-center">
+      <img height="200" src="loading.gif" alt="some" />
+    </div>;
   } else {
     return (
       <div class="grid sm:grid-cols-1 bg-gray-100 md:grid-cols-6 ">
         <div class="sm:grid-cols-0 col-start-1 col-end-2">
           <SideBar />
         </div>
-
         <div class="col-start-2 mt-5  col-span-3">
           <p className="text-2xl font-semibold">Booking That Matters</p>
           <div class="flex flex-row my-5">
@@ -99,11 +100,11 @@ export default function HomeScreen() {
               src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png"
               alt=""
             />
-            
+
             <div>
-              <p className="font-semibold text-white text-base">{userInfo==null?"Please Login":userInfo.name}</p>
+              <p className="font-semibold text-white text-base">{userInfo == null ? "Please Login" : userInfo.name}</p>
               <p className="font-semibold text-sm text-white">
-              {userInfo==null?"":userInfo.email}
+                {userInfo == null ? "" : userInfo.email}
               </p>
             </div>
           </div>

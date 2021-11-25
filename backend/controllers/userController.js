@@ -2,8 +2,6 @@ const User = require('../models/userModel.js');
 const Hotel = require('../models/hotelModel.js');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utils/generateTokens.js');
-const Hotel_Bookings = require('../models/HotelBookingModel.js');
-const Restraunt_Booking = require('../models/RestrauntBookingModel.js');
 const Restraunt = require('../models/restrauntModels.js');
 
 const authUser = asyncHandler(async (req, res) => {
@@ -146,100 +144,7 @@ const updateUserbyAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-const hotel_bookings = asyncHandler(async(req,res) => {
-    
-    const user = await User.findById(req.body.user_id);
-    const hotel = await Hotel.findById(req.body.hotel_id);
-
-    if(user && hotel){
-      const {user_id,hotel_id,type1,type2,type3} = req.body;
-
-        if((type1+type2+type3)<=hotel.rooms){
-
-            user.hotel_bookings.push(hotel_id);            
-            hotel.rooms -= (type1+type2+type3);
-            hotel.booked_by.push(user_id);
-
-            const updatedUser = await user.save();
-            const updatedHotel = await hotel.save();
-
-            const booking = await Hotel_Bookings.create({
-              user_id,
-              hotel_id,
-              type1,
-              type2,
-              type3
-            });
-
-            res.status(201).json({
-                user_id: booking.user_id,
-                hotel_id: booking.hotel_id,
-                type1: booking.type1,
-                type2:booking.type2,
-                type3:booking.type3
-            });
-            
-        }else{
-            res.status(404);
-            throw new Error('Sorry! You exceeded the Maximum Number Of Available Rooms')
-        }
-
-    }else{
-      res.status(404);
-      if(user)throw new Error('Hotel Not Found');
-      else throw new Error('User Not Found');
-    }
-
-});
-
-
-const restraunt_bookings = asyncHandler(async(req,res) => {
-  
-  const {user_id,type1,type2,type3,type4,hotel_id,restraunt_id} = req.body;
-
-  const user = await User.findById(user_id);
-  const restraunt = await Restraunt.findById(restraunt_id);
-
-    if(user && restraunt){
-
-      if((type1+type2+type3+type4)<=restraunt.Tables){
-            user.restraunt_bookings.push(restraunt_id);            
-            restraunt.Tables -= (type1+type2+type3+type4);
-            restraunt.booked_by.push(user_id);
-
-            const updatedUser = await user.save();
-            const updatedRestraunt = await restraunt.save();
-
-            const booking = await Restraunt_Booking.create({
-               user_id,
-               type1,
-               type2,
-               type3,
-               type4,
-               restraunt_id
-            });
-
-            res.status(201).json({
-                user_id: booking._id,
-                restraunt_id: booking.restraunt_id,
-                type1: booking.type1,
-                type2:booking.type2,
-                type3: booking.type3,
-                type4:booking.type4
-            });
-      }else{
-          res.status(404);
-          throw new Error('Sorry! You exceeded the Maximum Number Of Available Tables');
-      }
-    
-    }else{
-      res.status(404);
-      if(user)throw new Error('Restraunt Not Found');
-      else throw new Error('User Not Found');
-    }
-
-});
 
 
 
-module.exports = { authUser, getUserprofile, registerUser, updateUserprofile, getUsers, deleteUser, updateUserbyAdmin, getUsersById,hotel_bookings,restraunt_bookings };
+module.exports = { authUser, getUserprofile, registerUser, updateUserprofile, getUsers, deleteUser, updateUserbyAdmin, getUsersById };

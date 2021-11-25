@@ -22,8 +22,10 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     events: [],
-    hotel_bookings:[mongoose.Schema.Types.ObjectId],
-    restraunt_bookings:[mongoose.Schema.Types.ObjectId],
+    hotels: [],
+    restaurants: [],
+    hotel_bookings: [mongoose.Schema.Types.ObjectId],
+    restraunt_bookings: [mongoose.Schema.Types.ObjectId],
   },
   { timestamps: true }
 );

@@ -5,9 +5,9 @@ const RestrauntSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  description:{
-    type:String,
-    required:true
+  description: {
+    type: String,
+    required: true
   },
   location: {
     type: String,
@@ -25,10 +25,23 @@ const RestrauntSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  type1: {
+    type: Number
+  },
+  type2: {
+    type: Number
+  },
+  type3: {
+    type: Number
+  },
+  type4: {
+    type: Number
+  },
   images: [String],
   reviews: [],
   coordinates: [Number],
-  booked_by: [mongoose.Schema.Types.ObjectId],
+  tableCoordinates: [Number],
+  booked_by: [mongoose.Schema.Types.ObjectId]
 });
 
 const Restraunt = mongoose.model("Restraunt", RestrauntSchema);

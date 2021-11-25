@@ -45,3 +45,26 @@ exports.getRestraunt = async (req, res, next) => {
     });
   }
 };
+
+exports.updateRestraunt = async (req, res, next) => {
+  try {
+    const restraunt = await Restraunt.findById(req.params.id);
+    restraunt.Table = req.body.table;
+    restraunt.type1 = req.body.type1;
+    restraunt.type2 = req.body.type2;
+    restraunt.type3 = req.body.type3;
+    restraunt.type4 = req.body.type4;
+    restraunt.tableCoordinates = req.body.tableCoordinates;
+    restraunt.save();
+    res.status(201).json({
+      status: "Success",
+      data: {
+        restraunt: restraunt,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+    });
+  }
+};

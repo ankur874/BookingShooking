@@ -6,5 +6,5 @@ router.route("/")
   .get(restrauntController.getAllRestraunts)
   .post(restrauntController.createRestraunt);
 
-router.route("/:id").get(restrauntController.getRestraunt);
+router.route("/:id").get(restrauntController.getRestraunt).post(restrauntController.updateRestraunt);
 module.exports = router;
