@@ -9,6 +9,7 @@ const HotelOverview = () => {
             "/checkout",
             { token }
         );
+
         const { status } = response.data;
         console.log("Response:", response.data);
         if (status === "success") {
