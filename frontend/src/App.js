@@ -34,8 +34,9 @@ function App() {
             element={<RoomEditor />}
           />
           <Route path="/map" element={<ExploreMap />} />
-          <Route path="/bookings" element={<Bookings />} />
-          <Route path="/form" element={<ApplicationFrom />} />
+          {/* <Route path="/bookings" element={ */}
+          // <Route path="/form" element={<ApplicationFrom />} />
+          <Route path="/bookings" element={<HotelOverview />} />
         </Routes>
       </Router>
     </>
