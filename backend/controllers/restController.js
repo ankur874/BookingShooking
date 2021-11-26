@@ -63,3 +63,23 @@ exports.updateRestraunt = async (req, res, next) => {
     });
   }
 };
+
+
+exports.addReview = async (req, res, next) => {
+  try {
+    const restraunt = await Restraunt.findById(req.params.id);
+    restraunt.reviews.push(req.body);
+    restraunt.save();
+    
+    res.status(201).json({
+      status: "Success",
+      data: {
+        restraunt: restraunt,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+    });
+  }
+};

@@ -26,7 +26,16 @@ const RestrauntSchema = mongoose.Schema({
     required: true,
   },
   images: [String],
-  reviews: [],
+  reviews: [
+    {userid:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    },
+    review:{
+      type:String,
+      required:true
+    }
+  }],
   coordinates: [Number],
   tableCoordinates: [{
     xCoordinate:{type:Number},
