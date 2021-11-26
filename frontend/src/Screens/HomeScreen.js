@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
-import Rating from "../Components/Rating";
-import TabsRender from "../Components/Tabs";
+import Rating from "../components/Rating";
+import TabsRender from "../components/Tabs";
 import "./HomeScreen.css";
-// import '@themesberg/flowbite';
 import SideBar from "./SideBar";
 
 export default function HomeScreen() {
@@ -20,7 +19,6 @@ export default function HomeScreen() {
 
   if (restaurants.data != null) {
     console.log(data1.restaurants.data[0].name, "res");
-
   }
   // console.log(userInfo, "vdfvdfv");
   useEffect(() => {

@@ -1,7 +1,16 @@
-import React from "react";
+
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listHotels } from "../actions/hotelActions";
+import { listRestaurants } from "../actions/restaurantActions";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 import { toast } from "react-toastify";
+import Review from "../components/Review";
+import ProductReviewCard from "../components/ProductReview";
+
+
+
 
 const HotelOverview = () => {
     const handleToken = async (token, addresses) => {
@@ -18,6 +27,24 @@ const HotelOverview = () => {
             toast("Something went wrong", { type: "error" });
         }
     }
+
+
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.hotelList);
+    // const data1 = useSelector((state) => state.restaurantList);
+  
+    const { hotels, loading } = data;
+    console.log(hotels);
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo, error } = userLogin;
+    console.log(userInfo, "vdfvdfv");
+    useEffect(() => {
+      dispatch(listHotels());
+      dispatch(listRestaurants());
+    }, [dispatch]);
+
+
+
     return (
         <>
 
@@ -82,6 +109,24 @@ const HotelOverview = () => {
                         >
                             Facilities
                         </h1>
+
+                    </div>
+                    <div className="flex flex-row justify-between mt-4 p-1">
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-tv text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">TV</p>
+                        </div>
+                        <div className="border border-gray-600 px-6">
+                            <i className="p-2 fas fa-fan text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">AC</p>
+                        </div>
+                        <div className="border border-gray-600 px-6 mr-20">
+                            <i className="p-2 fas fa-wifi text-4xl px-11"></i>
+                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Free WiFi</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-row justify-between p-1">
+
                     </div>
                     <div className="flex flex-row justify-between mt-4 ml-3 p-1">
                         <div className="border border-gray-600 px-6">
@@ -98,6 +143,7 @@ const HotelOverview = () => {
                         </div>
                     </div>
                     <div className="flex flex-row justify-between ml-3 p-1">
+
                         <div className="border border-gray-600 px-6">
                             <i className="p-2 fas fa-hot-tub text-4xl px-12"></i>
                             <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Geyser</p>
@@ -112,7 +158,11 @@ const HotelOverview = () => {
                             <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Kitchen</p>
                         </div>
                     </div>
+
+                    <div className="flex flex-row justify-between p-1">
+
                     <div className="flex flex-row justify-between ml-3 p-1">
+
                         <div className="border border-gray-600 px-6">
                             <i className="p-2 fas fa-car-battery text-4xl px-12"></i>
                             <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Backup</p>
@@ -182,8 +232,22 @@ const HotelOverview = () => {
                 </div>
 
             </div>
+
+
+            <Review />
+
+            <div class="grid grid-cols-1 md:grid-cols-6 m-10 gap-4">
+                <div class="col-span-2"><ProductReviewCard  /></div>
+                <div class="col-span-2"><ProductReviewCard /></div>
+                <div class="col-span-2"><ProductReviewCard /></div>
+            </div>
+
+
         </>
     );
 };
+
+
+
 
 export default HotelOverview;

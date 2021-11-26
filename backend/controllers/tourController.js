@@ -46,3 +46,23 @@ exports.getHotel = async (req, res, next) => {
     })
   }
 }
+
+
+exports.addReview = async (req, res, next) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    hotel.reviews.push(req.body);
+    hotel.save();
+    
+    res.status(201).json({
+      status: "Success",
+      data: {
+        hotel: hotel,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+    });
+  }
+};
