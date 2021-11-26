@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const hotelSchema = mongoose.Schema({
-  title: {
+  user_id: {
     type: String,
     required: true,
   },
@@ -18,16 +18,7 @@ const hotelSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
-  reviews: [
-    {userid:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true
-    },
-    review:{
-      type:String,
-      required:true
-    }
-  }],
+  reviews: [],
   pricePerNight: {
     type: Number,
     required: true,
