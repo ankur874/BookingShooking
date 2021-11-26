@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
 import Rating from "../Components/Rating";
 import TabsRender from "../Components/Tabs";
 import "./HomeScreen.css";
-// import '@themesberg/flowbite';
 import SideBar from "./SideBar";
 
 export default function HomeScreen() {
+  let [rightName, setRightName] = useState("");
+  let [rightDesc, setRightDesc] = useState("");
+  let [rightFaci, setRightFaci] = useState("");
+  let [rightImages, setRightImages] = useState("");
+
   const dispatch = useDispatch();
   const data = useSelector((state) => state.hotelList);
   const data1 = useSelector((state) => state.restaurantList);
@@ -18,20 +24,27 @@ export default function HomeScreen() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, error } = userLogin;
 
-  if (restaurants.data != null) {
-    console.log(data1.restaurants.data[0].name, "res");
-
-  }
-  // console.log(userInfo, "vdfvdfv");
+  console.log(restaurants.data,"dataaaaaaaa" );
   useEffect(() => {
     dispatch(listHotels());
     dispatch(listRestaurants());
   }, [dispatch]);
-  if (hotels.data == null) {
-    return <div className="h-screen flex flex-col items-center justify-center">
-      <img height="200" src="loading.gif" alt="some" />
-    </div>;
+  function changeRightDrawer(click, e) {
+    setRightName(e.name);
+    setRightDesc(e.description);
+  }
+  const navigate = useNavigate();
+  function HandleClick(e) {
+    navigate("/hoteloverview");
+  }
+  if (hotels.data == null || restaurants.data == null) {
+    return (
+      <div className="h-screen flex flex-col items-center justify-center">
+        <img height="200" src="loading.gif" alt="some" />
+      </div>
+    );
   } else {
+    console.log(restaurants.data, "afadfdsfsdf");
     return (
       <div class="grid sm:grid-cols-1 bg-gray-100 md:grid-cols-6 ">
         <div class="sm:grid-cols-0 col-start-1 col-end-2">
@@ -73,9 +86,16 @@ export default function HomeScreen() {
             </div>
 
             <div className="grid grid-cols-3  gap-5">
-              <div className="hover:scale-110">{singleLargeComponent()}</div>
-              {/* <div>{singleLargeComponent()}</div>
-              <div>{singleLargeComponent()}</div> */}
+              {restaurants.data.map((e) => {
+                return (
+                  <div
+                    onClick={(click) => changeRightDrawer(click, e)}
+                    className="hover:scale-110"
+                  >
+                    {SingleLargeComponent(e)}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -102,16 +122,18 @@ export default function HomeScreen() {
             />
 
             <div>
-              <p className="font-semibold text-white text-base">{userInfo == null ? "Please Login" : userInfo.name}</p>
+              <p className="font-semibold text-white text-base">
+                {userInfo == null ? "Please Login" : userInfo.name}
+              </p>
               <p className="font-semibold text-sm text-white">
                 {userInfo == null ? "" : userInfo.email}
               </p>
             </div>
           </div>
-          <p className="text-2xl font-semibold ml-5 ">Shikara Hotel</p>
+          <p className="text-2xl font-semibold ml-5 ">{rightName}</p>
 
           <div className="">
-            <TabsRender></TabsRender>
+            <TabsRender facilities={rightFaci} desc={rightDesc}></TabsRender>
           </div>
           <div class="grid-cols-3  p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
             <div class="w-full rounded">
@@ -132,10 +154,16 @@ export default function HomeScreen() {
                 alt="s"
               />
             </div>
-
-            <button className="w-100% bg-blue-500 col-span-3 text-3xl m-12 hover:bg-blue-600">
-              Book
-            </button>
+            {rightName == "" ? (
+              <div></div>
+            ) : (
+              <button
+                onClick={(e) => HandleClick(e)}
+                className="w-100% bg-blue-500 col-span-3 text-3xl m-12 hover:bg-blue-600"
+              >
+                Book
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -143,27 +171,28 @@ export default function HomeScreen() {
   }
 }
 
-function singleLargeComponent() {
+function SingleLargeComponent(e) {
   return (
     <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
       <Rating />
       <img
         className="h-3/4 p-2"
-        src="https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2019-11/ISR.png"
-        alt="Mountain"
+        
+        src={`/images/${e.images[0]}`}
+       
       />
       <div class="px-2  py-1">
-        <p class=" text-md font-bold mb-2">mainData[0].title</p>
+        <p class=" text-md font-bold mb-2">{e.name}</p>
         <div class="flex flex-row ">
           <i class="fas text-blue-400 fa-map-marker-alt"></i>
-          <p class="text-sm text-gray-400 pl-2">mainData[0].title</p>
+          <p class="text-sm text-gray-400 pl-2">{e.location}</p>
         </div>
         <div>
           <p class="text-xl mt-1 font-bold">
             <i class="fas fa-dollar-sign"></i>
-            mainData[0].title
+            {e.Dining_price}
             <span class="text-sm text-gray-400 inline-block align-baseline">
-              /night
+              /table
             </span>
           </p>
         </div>

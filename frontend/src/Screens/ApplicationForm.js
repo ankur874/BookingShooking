@@ -1,65 +1,77 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { createRestaurant } from "../actions/restaurantActions";
+import {
+  createRestaurant,
+  listRestaurants,
+} from "../actions/restaurantActions";
 
 const ApplicationFrom = () => {
   ////////////////////////////////////////////////////////////////////////////////
   const [coverPhoto, setCoverPhoto] = useState("");
   const [resName, setResName] = useState("");
+  const [resId, setResId] = useState("");
   const [resAddress, setResAddress] = useState("");
   const [resLatitude, setResLatitude] = useState("");
   const [resLongitude, setResLongitude] = useState("");
   const [resDesc, setResDesc] = useState("");
-  // const [ownerFirstName, setOwnerFirstName] = useState("");
-  // const [ownerSecondName, setOwnerSecondName] = useState("");
-  // const [ownerEmail, setOwnerEmail] = useState("");
-  // const [ownerAddress, setOwnerAddress] = useState("");
-  // const [ownerState, setOwnerState] = useState("");
-  // const [ownerCity, setOwnerCity] = useState("");
-  // const [ownerCountry, setOwnerCountry] = useState("");
-  // const [ownerPostal, setPostal] = useState("");
   const [diningPrice, setDiningPrice] = useState(0);
   const [myLocation, setMyLocation] = useState({
     latitude: 0.0,
     longitude: 0.0,
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const data1 = useSelector((state) => state.restaurantList);
+  // if (data1.restaurants.data != null) {
+  //   console.log(
+  //     "data",
+  //     data1.restaurants.data[data1.restaurants.data.length - 1]._id
+  //   );
+  // }
   ////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
-    return navigator.geolocation.getCurrentPosition(function (position) {
-      setMyLocation({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
+    // dispatch(listHotels());
+    dispatch(listRestaurants());
+  }, [dispatch]);
+  navigator.geolocation.getCurrentPosition(function (position) {
+    setMyLocation({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
     });
   });
+
   const coverpic = useRef(null);
   const profilepic = useRef(null);
   let form = useRef(null);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createRestaurant({
-      name:resName,
-      description:resDesc,
-      location:resAddress,
-      Dining_price:diningPrice,
-      Tables:0,
-      rating:4.5,
-      images:[coverPhoto],
-      reviews:[],
-      coordinates:[myLocation.latitude,myLocation.longitude],
-      booked_by:[]
-    }));
-    console.log(
-      resName,
-      resAddress,
-      resDesc,
-      myLocation.latitude,
-      myLocation.longitude,
-      diningPrice
+    dispatch(
+      createRestaurant({
+        name: resName,
+        description: resDesc,
+        location: resAddress,
+        Dining_price: diningPrice,
+        Tables: 0,
+        rating: 4.5,
+        images: [coverPhoto],
+        reviews: [],
+        coordinates: [myLocation.latitude, myLocation.longitude],
+        booked_by: [],
+      })
     );
+    if ( data1.restaurants.data != null) {
+      // console.log(
+      //       "data",
+      //       data1.restaurants.data[da]._id
+      //     );
+       
+      navigate(`/tableselector/${data1.restaurants.data[data1.restaurants.data.length-1]._id}`);
+
+      console.log("resid", data1.restaurants.data[data1.restaurants.data.length-1]._id);
+    }
   };
   const onCoverClick = async (e) => {
     // const data=new FormData();
@@ -107,11 +119,11 @@ const ApplicationFrom = () => {
                 <input
                   type="file"
                   id="coverfile"
-                  className="bg-white"
+                  className="bg-red-700 w-0"
                   onChange={onCoverClick}
                   // onClick={}
                   ref={coverpic}
-                  // style={{ display: "none" }}
+                  // style={{ display: "hidden" }}
                 />
                 {/* <button
                   type="file"
@@ -120,68 +132,9 @@ const ApplicationFrom = () => {
                 > */}
                 Change Cover Photo
                 {/* </button> */}
-                <div className="ml-2 text-gray-100">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-edit"
-                    width={18}
-                    height={18}
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                    <line x1={16} y1={5} x2={19} y2={8} />
-                  </svg>
-                </div>
+               
               </div>
-              {/* <div className="w-20 h-20 rounded-full bg-cover bg-center bg-no-repeat absolute bottom-0 -mb-10 ml-12 shadow flex items-center justify-center">
-                <img
-                  src="https://cdn.tuk.dev/assets/webapp/forms/form_layouts/form2.jpg"
-                  alt
-                  className="absolute z-0 h-full w-full object-cover rounded-full shadow top-0 left-0 bottom-0 right-0"
-                />
-                <div className="absolute bg-black opacity-50 top-0 right-0 bottom-0 left-0 rounded-full z-0" />
-                <div className="cursor-pointer flex flex-col justify-center items-center z-10 text-gray-100">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-edit"
-                    width={20}
-                    height={20}
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                    <line x1={16} y1={5} x2={19} y2={8} />
-                  </svg>
-                  <input
-                    type="file"
-                    id="profilefile"
-                    ref={profilepic}
-                    style={{ display: "none" }}
-                  />
-                  <input
-                  type="file"
-                  id="coverfile"
-                  className="bg-white"
-                  onChange={onProfileClick}
-                  // onClick={}
-                  ref={coverpic}
-                  // style={{ display: "none" }}
-                />
-                </div>
-              </div> */}
+             
             </div>
             <div className="container mx-auto flex flex-row">
               <div className="mt-16 xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pr-4">
@@ -301,207 +254,20 @@ const ApplicationFrom = () => {
           </div>
         </div>
       </div>
-      {/* <div className="container my-auto mx-auto bg-white dark:bg-gray-800 mt-3 rounded px-4">
-        <div className="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5">
-          <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
-            <p className="text-lg text-gray-800 dark:text-gray-100 font-bold">
-              Owner's Information
-            </p>
-          </div>
-        </div>
-        <div className="mx-auto pt-4">
-          <div className="container mx-auto flex flex-row">
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pr-4">
-              <label
-                htmlFor="FirstName"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                First Name
-              </label>
-              <input
-                type="text"
-                id="FirstName"
-                name="firstName"
-                value={ownerFirstName}
-                onInput={(e) => setOwnerFirstName(e.target.value)}
-                required
-                className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                placeholder
-              />
-            </div>
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pl-4">
-              <label
-                htmlFor="LastName"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="LastName"
-                name="lastName"
-                value={ownerSecondName}
-                onInput={(e) => setOwnerSecondName(e.target.value)}
-                required
-                className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                placeholder
-              />
-            </div>
-          </div>
-          <div className="container mx-auto flex flex-row">
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pr-4">
-              <label
-                htmlFor="Email"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                Email
-              </label>
-              <div className="border border-gray-300 shadow-sm rounded flex">
-                <div className="px-4 py-3 dark:text-gray-100 flex items-center border-r border-gray-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-mail"
-                    width={20}
-                    height={20}
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <rect x={3} y={5} width={18} height={14} rx={2} />
-                    <polyline points="3 7 12 13 21 7" />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  id="Email"
-                  name="email"
-                  value={ownerEmail}
-                  onInput={(e) => setOwnerEmail(e.target.value)}
-                  required
-                  className="pl-3 py-3 w-full text-sm focus:outline-none border border-transparent focus:border-indigo-700 bg-transparent rounded placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                  placeholder="example@gmail.com"
-                />
-              </div>
-            </div>
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pl-4">
-              <label
-                htmlFor="StreetAddress"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                Street Address
-              </label>
-              <input
-                type="text"
-                id="StreetAddress"
-                name="streetAddress"
-                value={ownerAddress}
-                onInput={(e) => setOwnerAddress(e.target.value)}
-                required
-                className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded bg-transparent text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                placeholder
-              />
-            </div>
-          </div>
-          <div className="container mx-auto flex flex-row">
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pr-4">
-              <label
-                htmlFor="City"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                City
-              </label>
-              <div className="border border-gray-300 dark:border-gray-700 shadow-sm rounded flex">
-                <input
-                  type="text"
-                  id="City"
-                  name="city"
-                  value={ownerCity}
-                  onInput={(e) => setOwnerCity(e.target.value)}
-                  required
-                  className="pl-3 py-3 w-full text-sm focus:outline-none border border-transparent focus:border-indigo-700 bg-transparent rounded placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                  placeholder="Los Angeles"
-                />
-              </div>
-            </div>
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pl-4">
-              <label
-                htmlFor="State/Province"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                State/Province
-              </label>
-              <input
-                type="text"
-                id="State/Province"
-                name="state"
-                value={ownerState}
-                onInput={(e) => setOwnerState(e.target.value)}
-                required
-                className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                placeholder="California"
-              />
-            </div>
-          </div>
-          <div className="container mx-auto flex flex-row">
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pr-4">
-              <label
-                htmlFor="Country"
-                className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-              >
-                Country
-              </label>
-              <input
-                type="text"
-                id="Country"
-                name="country"
-                value={ownerCountry}
-                onInput={(e) => setOwnerCountry(e.target.value)}
-                required
-                className="border bg-transparent border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                placeholder="United States"
-              />
-            </div>
-            <div className="xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pl-4">
-              <div className="flex items-center pb-2">
-                <label
-                  htmlFor="ZIP"
-                  className="text-sm font-bold text-gray-800 dark:text-gray-100"
-                >
-                  ZIP/Postal Code
-                </label>
-              </div>
-              <input
-                type="text"
-                name="zip"
-                value={ownerPostal}
-                onInput={(e) => setPostal(e.target.value)}
-                required
-                id="ZIP"
-                className="bg-transparent border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400"
-                placeholder={86745}
-              />
-            </div>
-          </div>
-        </div>
-      </div> */}
+
       <div className="container mx-auto w-11/12 xl:w-full">
         <div className="rounded w-full py-4 sm:px-0 bg-white dark:bg-gray-800 flex justify-end">
           <button className="bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-6 py-2 text-xs mr-4">
             Cancel
           </button>
-          <Link to="/tableselector">
+
           <button
-            // onClick={(e) => handleSubmit(e)}
+            onClick={(e) => handleSubmit(e)}
             className="bg-indigo-700 focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white mr-4 px-8 py-2 text-sm"
             type="submit"
           >
             Next
           </button>
-          </Link>
         </div>
       </div>
     </div>
