@@ -30,20 +30,25 @@ const RoomEditor = () => {
   for (var i = 0; i < table4; i++) {
     type4.push("table4");
   }
-  const nav=useNavigate();
-  function stopHandler(e, type,ele) {
+  const nav = useNavigate();
+  function stopHandler(e, type, ele) {
     // console.log(e,"e");
-    finalData.push({ xCoordinate: e.clientX, yCoordinate: e.clientY, tableType: type });
+    finalData.push({
+      xCoordinate: e.clientX,
+      yCoordinate: e.clientY,
+      tableType: type,
+    });
     // console.log(finalData);
   }
-  async function submitHandler(e){
-    const data=await axios.post(`/api/restraunts/${id}`,
-    {
-      table:table1+table2+table3+table4,
-      tableCoordinates:finalData
+  async function submitHandler(e) {
+    const data = await axios.post(`/api/restraunts/${id}`, {
+      table: table1 + table2 + table3 + table4,
+      tableCoordinates: finalData,
     });
-    nav('/');
-    console.log(data,"]4551final");
+    // setInterval(() => {
+    // }, 2000);
+    nav("/");
+    console.log(data, "]4551final");
   }
   return (
     <div className="">
@@ -104,7 +109,10 @@ const RoomEditor = () => {
           </Draggable>
         );
       })}
-      <button onClick={(e)=>submitHandler(e)} className="absolute bottom-0 left-1/2 bg-purple-800 text-white text-semibold rounded-sm shadow-sm hover:bg-purple-900  hover:-translate-y-1 transform p-2">
+      <button
+        onClick={(e) => submitHandler(e)}
+        className="absolute bottom-0 left-1/2 bg-purple-800 text-white text-semibold rounded-sm shadow-sm hover:bg-purple-900  hover:-translate-y-1 transform p-2"
+      >
         Click to Finish
       </button>
       {/* <div style={{top:y,left:x}} className={`absolute `}>
