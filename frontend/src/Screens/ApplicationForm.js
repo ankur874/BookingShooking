@@ -119,7 +119,7 @@ const ApplicationFrom = () => {
                 <input
                   type="file"
                   id="coverfile"
-                  className="bg-red-700 w-0"
+                  className="bg-red-700"
                   onChange={onCoverClick}
                   // onClick={}
                   ref={coverpic}
@@ -130,7 +130,7 @@ const ApplicationFrom = () => {
                   // onClick={onCoverClick}
                   className="text-white"
                 > */}
-                Change Cover Photo
+                {/* Change Cover Photo */}
                 {/* </button> */}
                
               </div>
