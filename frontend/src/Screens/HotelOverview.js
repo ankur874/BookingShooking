@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listHotels } from "../actions/hotelActions";
@@ -8,9 +7,6 @@ import StripeCheckout from "react-stripe-checkout";
 import { toast } from "react-toastify";
 import Review from "../components/Review";
 import ProductReviewCard from "../components/ProductReview";
-
-
-
 
 const HotelOverview = () => {
     const handleToken = async (token, addresses) => {
@@ -28,7 +24,6 @@ const HotelOverview = () => {
         }
     }
 
-
     const dispatch = useDispatch();
     const data = useSelector((state) => state.hotelList);
     // const data1 = useSelector((state) => state.restaurantList);
@@ -43,6 +38,9 @@ const HotelOverview = () => {
       dispatch(listRestaurants());
     }, [dispatch]);
 
+    // windows.location.href
+    // find a hotel from the hotels array and match it using id (windows.location.href);
+    // extract all its reviews here
 
 
     return (
@@ -109,7 +107,6 @@ const HotelOverview = () => {
                         >
                             Facilities
                         </h1>
-
                     </div>
                     <div className="flex flex-row justify-between mt-4 p-1">
                         <div className="border border-gray-600 px-6">
@@ -126,24 +123,6 @@ const HotelOverview = () => {
                         </div>
                     </div>
                     <div className="flex flex-row justify-between p-1">
-
-                    </div>
-                    <div className="flex flex-row justify-between mt-4 ml-3 p-1">
-                        <div className="border border-gray-600 px-6">
-                            <i className="p-2 fas fa-tv text-4xl px-11"></i>
-                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">TV</p>
-                        </div>
-                        <div className="border border-gray-600 px-6">
-                            <i className="p-2 fas fa-fan text-4xl px-11"></i>
-                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">AC</p>
-                        </div>
-                        <div className="border border-gray-600 px-6 mr-20">
-                            <i className="p-2 fas fa-wifi text-4xl px-11"></i>
-                            <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Free WiFi</p>
-                        </div>
-                    </div>
-                    <div className="flex flex-row justify-between ml-3 p-1">
-
                         <div className="border border-gray-600 px-6">
                             <i className="p-2 fas fa-hot-tub text-4xl px-12"></i>
                             <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Geyser</p>
@@ -158,11 +137,7 @@ const HotelOverview = () => {
                             <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Kitchen</p>
                         </div>
                     </div>
-
                     <div className="flex flex-row justify-between p-1">
-
-                    <div className="flex flex-row justify-between ml-3 p-1">
-
                         <div className="border border-gray-600 px-6">
                             <i className="p-2 fas fa-car-battery text-4xl px-12"></i>
                             <p className="ml-2 text-base leading-6 font-normal text-gray-600 lg:w-full md:w-9/12 w-full">Backup</p>
@@ -233,15 +208,14 @@ const HotelOverview = () => {
 
             </div>
 
+            <Review  />{/* type = "hotel" id = {id} */}
 
-            <Review />
-
+            {/* adding the reviews extracted before */}
             <div class="grid grid-cols-1 md:grid-cols-6 m-10 gap-4">
                 <div class="col-span-2"><ProductReviewCard  /></div>
                 <div class="col-span-2"><ProductReviewCard /></div>
                 <div class="col-span-2"><ProductReviewCard /></div>
             </div>
-
 
         </>
     );
