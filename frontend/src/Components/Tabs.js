@@ -29,25 +29,7 @@ const Tabs = (props) => {
                   Overview
                 </a>
               </li>
-              <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a
-                  className={
-                    "text-xs font-bold uppercase px-5 py-3  rounded block leading-normal " +
-                    (openTab === 2
-                        ? "text-white bg-gray-600"
-                        : "text-gray-700 bg-white")
-                  }
-                  onClick={e => {
-                    e.preventDefault();
-                    setOpenTab(2);
-                  }}
-                  data-toggle="tab"
-                  href="#link2"
-                  role="tablist"
-                >
-                   Facilities
-                </a>
-              </li>
+            
             
             </ul>
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded">

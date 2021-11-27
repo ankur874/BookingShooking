@@ -36,8 +36,7 @@ function App() {
           <Route path="/map" element={<ExploreMap />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/form" element={<ApplicationFrom />} />
-          <Route path="/hoteloverview" element={<HotelOverview />} />
-          <Route path="/form" element={<ApplicationFrom />} />
+          <Route path="/hoteloverview/:id" element={<HotelOverview />} />
         </Routes>
       </Router>
     </>

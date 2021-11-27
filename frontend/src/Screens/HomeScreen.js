@@ -14,7 +14,9 @@ export default function HomeScreen() {
   let [rightName, setRightName] = useState("");
   let [rightDesc, setRightDesc] = useState("");
   let [rightFaci, setRightFaci] = useState("");
-  let [rightImages, setRightImages] = useState("");
+  let [rightImages, setRightImages] = useState([]);
+  let [openId, setOpenId] = useState("");
+  // let rightImages = [];
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.hotelList);
@@ -25,9 +27,8 @@ export default function HomeScreen() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, error } = userLogin;
 
-
   if (restaurants.data != null) {
-    console.log(data1.restaurants.data[0].name, "res");
+    console.log(data1.restaurants.data[0].id, "resId");
   }
   // console.log(userInfo, "vdfvdfv");
 
@@ -38,10 +39,14 @@ export default function HomeScreen() {
   function changeRightDrawer(click, e) {
     setRightName(e.name);
     setRightDesc(e.description);
+    setRightImages(e.images);
+    // rightImages=e.images;
+    console.log(e._id, e.name);
+    setOpenId(e._id);
   }
   const navigate = useNavigate();
   function HandleClick(e) {
-    navigate("/hoteloverview");
+    navigate(`/hoteloverview/${openId}`);
   }
   if (hotels.data == null || restaurants.data == null) {
     return (
@@ -143,22 +148,24 @@ export default function HomeScreen() {
           </div>
           <div class="grid-cols-3  p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
             <div class="w-full rounded">
-              <img
-                src="https://cdn0.weddingwire.in/vendor/4505/3_2/960/jpg/img-20190208-wa0018_15_184505.jpeg"
-                alt="s"
-              />
+              {rightImages.length >= 2 ? (
+                <img src={`/images/${rightImages[1]}`} alt="s" />
+              ) : (
+                <div></div>
+              )}
             </div>
             <div class="w-full col-span-2 row-span-2 rounded">
-              <img
-                src="https://cdn0.weddingwire.in/vendor/4505/3_2/960/jpg/img-20190208-wa0028_15_184505.jpeg"
-                alt="s"
-              />
+              <img src={`/images/${rightImages[0]}`} alt="s" />
             </div>
             <div class="w-full rounded">
-              <img
-                src="https://cdn.venuelook.com/uploads/space_16878/1547448955_595x400.png"
-                alt="s"
-              />
+              {rightImages.length >= 3 ? (
+                <img
+                  src="https://cdn.venuelook.com/uploads/space_16878/1547448955_595x400.png"
+                  alt="s"
+                />
+              ) : (
+                <div></div>
+              )}
             </div>
             {rightName == "" ? (
               <div></div>
@@ -181,12 +188,7 @@ function SingleLargeComponent(e) {
   return (
     <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
       <Rating />
-      <img
-        className="h-3/4 p-2"
-        
-        src={`/images/${e.images[0]}`}
-       
-      />
+      <img className="h-3/4 p-2" src={`/images/${e.images[0]}`} />
       <div class="px-2  py-1">
         <p class=" text-md font-bold mb-2">{e.name}</p>
         <div class="flex flex-row ">
