@@ -7,7 +7,8 @@ import StripeCheckout from "react-stripe-checkout";
 import { toast } from "react-toastify";
 import Review from "../components/Review";
 import ProductReviewCard from "../components/ProductReview";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import Book from "./Book";
 
 const HotelOverview = () => {
   const [res, setRes] = useState({});
@@ -22,13 +23,13 @@ const HotelOverview = () => {
       toast("Something went wrong", { type: "error" });
     }
   };
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const data1 = useSelector((state) => state.restaurantList);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, error } = userLogin;
-  // console.log(userInfo, "vdfvdfv");
   useEffect(() => {
     dispatch(listRestaurants());
   }, [dispatch]);
@@ -39,6 +40,9 @@ const HotelOverview = () => {
   if (restaurants.data != null) {
     result = restaurants.data.filter((restaurant) => restaurant._id == id);
     console.log(result, "result");
+  }
+  function bookIt() {
+    navigate(`/book/${id}`);
   }
   if (result.length == 0) {
     return (
@@ -69,9 +73,7 @@ const HotelOverview = () => {
             >
               {result[0].name}
             </h1>
-            <p className="mx-6 mt-6 color-gray-200">
-            {result[0].location}
-            </p>
+            <p className="mx-6 mt-6 color-gray-200">{result[0].location}</p>
           </div>
           <div className="mr-20 mt-5 px-5 py-3 border border-green-600 rounded">
             <p className=" fa fa-star text-4xl bg-green">&nbsp;4.0</p>
@@ -111,7 +113,7 @@ const HotelOverview = () => {
                 className="xl:pr-20 text-base leading-normal mt-4 text-gray-600 "
                 style={{ alignSelf: "flex-end" }}
               >
-               {result[0].description}
+                {result[0].description}
               </p>
             </div>
             <div className="pb-2 mt-12">
@@ -250,6 +252,7 @@ const HotelOverview = () => {
             Check On Map
           </button>
           <div
+            onClick={() => bookIt()}
             className="
 						focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800
 						text-base
