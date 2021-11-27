@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const Review = () => {
+const Review = (props) => {
 
     const [state,setState] = useState("");
     const userLogin = useSelector((state) => state.userLogin);
     const { loading, userInfo, error } = userLogin;
 
     async function handleClick(){
+        // await axios.post('/api/' + {props[type]} + '/update/' + {props[id]}',{userid:userInfo._id,review:state});
         await axios.post('/api/restraunts/update/619f68361d46631ba27b82ca',{userid:userInfo._id,review:state});
         console.log(userInfo);
         console.log(state);
