@@ -25,22 +25,23 @@ const RestrauntSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  type1: {
-    type: Number
-  },
-  type2: {
-    type: Number
-  },
-  type3: {
-    type: Number
-  },
-  type4: {
-    type: Number
-  },
   images: [String],
-  reviews: [],
+  reviews: [
+    {userid:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    },
+    review:{
+      type:String,
+      required:true
+    }
+  }],
   coordinates: [Number],
-  tableCoordinates: [Number],
+  tableCoordinates: [{
+    xCoordinate:{type:Number},
+    yCoordinate:{type:Number},
+    tableType:{type:Number}
+  }],
   booked_by: [mongoose.Schema.Types.ObjectId]
 });
 

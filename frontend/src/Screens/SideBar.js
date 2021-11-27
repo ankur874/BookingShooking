@@ -213,7 +213,16 @@ export default function SideBar() {
               href="/form"
             >
               <i class="fas fa-briefcase"></i>
-              <span class="ml-2 text-sm font-medium">Make Me Listed</span>
+              <span class="ml-2 text-sm font-medium">Make Res Listed</span>
+              
+            </a>
+            <a
+              class="flex items-center justify-center  w-full h-24 mt-1 bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
+              href="/"
+            >
+              <i class="fas fa-briefcase"></i>
+              <span class="ml-2 text-sm font-medium">Make Hotel Listed</span>
+              
             </a>
             {userInfo == null ? (
               <>

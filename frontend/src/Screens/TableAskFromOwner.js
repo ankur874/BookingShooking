@@ -5,6 +5,7 @@ import table_4 from "../img/table_4.png";
 import CounterInput from "react-counter-input";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import RoomEditor from "./RoomEditor";
 // import CounterInput from "react-native-counter-input";
 
@@ -14,6 +15,9 @@ export default function TableAskFromOwner() {
   const [table3, setTable3] = useState(0);
   const [table4, setTable4] = useState(0);
   const [nextPagePath, setNextPagePath] = useState("/tableselector");
+  const data = useParams();
+  const navigate = useNavigate();
+  console.log(data.id, "id");
   function onClick() {
     if (
       (table1 === 0 && table2 === 0 && table3 === 0 && table4 === 0) ||
@@ -21,9 +25,9 @@ export default function TableAskFromOwner() {
     ) {
       alert("Please select atleast 5 tables");
     } else {
-      setNextPagePath(() => {
-        return `/roomeditor/${table1}/${table2}/${table3}/${table4}`;
-      });
+      navigate(
+        `/roomeditor/${table1}/${table2}/${table3}/${table4}/${data.id}`
+      );
     }
   }
   return (
@@ -80,14 +84,13 @@ export default function TableAskFromOwner() {
             />
           </div>
         </div>
-        <Link to={nextPagePath}>
-          <button
-            onClick={onClick}
-            className="w-screen p-2 absolute bottom-0 bg-blue-600 hover:bg-blue-700 font-bold text-2xl "
-          >
-            Double-click to set layout
-          </button>
-        </Link>
+
+        <button
+          onClick={onClick}
+          className="w-screen p-2 absolute bottom-0 bg-blue-600 hover:bg-blue-700 font-bold text-2xl "
+        >
+        Click to set layout
+        </button>
       </div>
     </div>
   );

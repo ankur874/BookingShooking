@@ -22,7 +22,7 @@ exports.getAllHotels = async (req, res, next) => {
     res.status(201).json({
       status: "Success",
       data: hotels
-      
+
     })
   } catch (err) {
     res.status(500).json({
@@ -44,5 +44,42 @@ exports.getHotel = async (req, res, next) => {
     res.status(500).json({
       status: "Failed"
     })
+  }
+}
+
+
+exports.addReview = async (req, res, next) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    hotel.reviews.push(req.body);
+    hotel.save();
+
+    res.status(201).json({
+      status: "Success",
+      data: {
+        hotel: hotel,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+    });
+  }
+};
+
+exports.bookHotel = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.hotels.push(req.body.hotelId);
+    user.save();
+
+    res.status(201).json({
+      status: "Success",
+      data: user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+    });
   }
 }
