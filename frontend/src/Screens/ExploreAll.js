@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Rating from "../Components/Rating";
+import Rating from "../components/Rating";
 import SideBar from "./SideBar";
 import ReactSearchBox from "react-search-box";
-import DropDown from "../Components/dropdown";
-import Slider from "../Components/slider";
+import DropDown from "../components/dropdown";
+import Slider from "../components/slider";
 import { Link } from "react-router-dom";
 
 export default function ExploreAll() {

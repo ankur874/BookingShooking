@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { listRestaurants } from "../actions/restaurantActions";
@@ -10,6 +10,8 @@ import table_3 from "../img/table_3.png";
 import table_4 from "../img/table_4.png";
 
 export default function Book() {
+  const [selected,setSelected]=useState("");
+  const [selectedColor,setSelectedColor]=useState("white");
   const dispatch = useDispatch();
   const data1 = useSelector((state) => state.restaurantList);
   const navigate = useNavigate();
@@ -28,6 +30,11 @@ export default function Book() {
   const handleBooking = async () => {
     await axios.post(`/api/restraunts/book/${userInfo._id}`, { restaurantId: result[0]._id })
     navigate("/")
+  }
+  function onClick(clk,e){
+    setSelected(e._id);
+    setSelectedColor("sha");
+    console.log(selected,"idddd");
   }
 
   if (result.length === 0) {
@@ -49,22 +56,23 @@ export default function Book() {
               position: "absolute",
               top: e.yCoordinate,
               left: e.xCoordinate,
+              
             }}
           >
             {e.tableType === 1 && (
-              <div
-                style={{ border: "1px solid #F3F4F6" }}
-                className="shadow-md "
+              <div onClick={(cl)=>onClick(cl,e)}
+                style={{ border: "1px solid #F3F4F6", backgroundColor:selected==e._id?selectedColor:"white" }}
+                className={ selected==e._id? "ring-4 ring-green-300 shadow-lg  ":" "}
               >
                 <img height="220" width="220" src={table_1} alt="some" />
-                <div className="rounded-full bg-yellow-300"> </div>
+                <div className="rounded-full   bg-yellow-300 "> </div>
 
               </div>
             )}
             {e.tableType === 2 && (
-              <div
-                style={{ border: "1px solid #F3F4F6" }}
-                className="shadow-md "
+              <div onClick={(cl)=>onClick(cl,e)}
+                style={{ border: "1px solid #F3F4F6" ,backgroundColor:selected==e._id?selectedColor:"white"}}
+                className={ selected==e._id? "ring-4 ring-green-300 shadow-lg  ":" "}
               >
                 <img height="220" width="220" src={table_2} alt="some" />
                 <div className="rounded-full bg-yellow-300"> </div>
@@ -72,9 +80,9 @@ export default function Book() {
               </div>
             )}
             {e.tableType === 3 && (
-              <div
-                style={{ border: "1px solid #F3F4F6" }}
-                className=" shadow-md "
+              <div onClick={(cl)=>onClick(cl,e)}
+                style={{ border: "1px solid #F3F4F6" ,backgroundColor:selected==e._id?selectedColor:"white"}}
+                className={ selected==e._id? "ring-4 ring-green-300 shadow-lg  ":" "}
               >
                 <img height="220" width="220" src={table_3} alt="some" />
                 <div className="rounded-full bg-yellow-300"> </div>
@@ -82,10 +90,10 @@ export default function Book() {
             )}
             {e.tableType === 4 && (
               <div
+              onClick={(cl)=>onClick(cl,e)}
 
-
-                style={{ border: "1px solid #F3F4F6" }}
-                className=" shadow-md "
+                style={{ border: "1px solid #F3F4F6" ,backgroundColor:selected==e._id?selectedColor:"white"}}
+                className={ selected==e._id? "ring-4 ring-green-300 shadow-lg  ":" "}
               >
 
                 <img height="220" width="220" src={table_4} alt="some" />
