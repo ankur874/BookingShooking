@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Rating from "../Components/Rating";
+import Rating from "../components/Rating";
 import SideBar from "./SideBar";
 import ReactSearchBox from "react-search-box";
 import { useDispatch, useSelector } from "react-redux";
@@ -175,7 +175,7 @@ export default function ExploreAll() {
   function singleComponent(id, e) {
     return (
       <Link to={`/hoteloverview/${e._id}`}>
-        <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
+        <div class="max-w-sm bg-white relative  h-72 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
           <Rating />
           <img
             className=" p-2"

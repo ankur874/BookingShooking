@@ -36,7 +36,7 @@ const Tabs = (props) => {
             </ul>
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
               <div className="px-4 py-2 flex-auto">
-                <div className="tab-content tab-space text-xl">
+                <div className="tab-content tab-space text-lg">
                   <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                     <p>
                       {props.props.desc}

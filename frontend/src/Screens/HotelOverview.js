@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listRestaurants } from "../actions/restaurantActions";
-import Review from "../Components/Review";
-import ProductReviewCard from "../Components/ProductReview";
+import Review from "../components/Review";
+import ProductReviewCard from "../components/ProductReview";
 import { useNavigate, useParams } from "react-router";
 
 const HotelOverview = () => {
