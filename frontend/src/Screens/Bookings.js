@@ -43,6 +43,7 @@ function Bookings() {
     );
   } else {
     return (
+
       <div className="flex flex-wrap">
         <div className="h-screen w-52">
           {" "}
