@@ -19,13 +19,21 @@ export default function HomeScreen() {
   // let rightImages = [];
 
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.hotelList);
   const data1 = useSelector((state) => state.restaurantList);
+
+  const { hotels, loading } = data;
   const { restaurants, loading1 } = data1;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, error } = userLogin;
 
-  useEffect(() => {
+  if (restaurants.data != null) {
+    console.log(data1.restaurants.data[data1.restaurants.data.length-1].id, "resId");
+  }
+  // console.log(userInfo, "vdfvdfv");
 
+  useEffect(() => {
+    dispatch(listHotels());
     dispatch(listRestaurants());
   }, [dispatch]);
   function changeRightDrawer(click, e) {
@@ -40,7 +48,7 @@ export default function HomeScreen() {
   function HandleClick(e) {
     navigate(`/hoteloverview/${openId}`);
   }
-  if ( restaurants.data == null) {
+  if (hotels.data == null || restaurants.data == null) {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
         <img height="200" src="loading.gif" alt="some" />
@@ -53,42 +61,16 @@ export default function HomeScreen() {
         <div class="sm:grid-cols-0 col-start-1 col-end-2">
           <SideBar />
         </div>
-        <div class="col-start-2 mt-5  col-span-3">
-          <p className="text-2xl font-semibold">Booking That Matters</p>
-          <div class="flex flex-row my-5">
-            <div class="sm:grid-cols-1">
-              <p class="text-xl font-medium">Date</p>
-              <input
-                className="placeholder-gray-500 placeholder-opacity-25 p-2 bg-white ml-0"
-                type="date"
-                placeholder="Jul 14 - Jul 16"
-              />
-            </div>
-            <div class="sm:grid-cols-1">
-              <p class="text-xl font-medium">Where To</p>
-              <input
-                type="text"
-                className="placeholder-gray-500 ml-0 p-2 bg-white"
-                placeholder="Location"
-              ></input>
-              <button
-                class="bg-blue-500 hover:bg-blue-700 hover:scale-110 transform transition-all active:scale-105 hover:shadow-md active:shadow-sm
-               text-white font-bold py-2 px-4 rounded-full"
-              >
-                Search
-              </button>
-            </div>
-          </div>
-
+        <div class="col-start-2 mt-5 col-span-3">
+          <p className="text-3xl font-semibold">EXPLORE</p>
           <div className="my-7">
             <div className="flex  flex-row justify-between">
-              <p class="text-xl mb-2 font-medium">Explore </p>
-              <a className=" text-blue-400" href="/explore">
+              <a className="pb-3 text-blue-400" href="/explore">
                 View All
               </a>
             </div>
 
-            <div className="grid grid-cols-3  gap-5">
+            <div className="mr-2 grid grid-cols-3  gap-5">
               {restaurants.data.map((e) => {
                 return (
                   <div
@@ -104,7 +86,7 @@ export default function HomeScreen() {
 
           <div className="my-10">
             <div className="flex flex-row">
-              <p class="text-xl mb-2 font-medium">Most Popular </p>
+              <p class="text-3xl py-2 mb-2 font-medium">Most Popular </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -133,12 +115,12 @@ export default function HomeScreen() {
               </p>
             </div>
           </div>
-          <p className="text-2xl font-semibold ml-5 ">{rightName}</p>
+          <p className="text-3xl font-semibold ml-2 my-2">{rightName}</p>
 
-          <div className="">
+          <div className="h-1/2">
             <TabsRender facilities={rightFaci} desc={rightDesc}></TabsRender>
           </div>
-          <div class="grid-cols-3  p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
+          <div class="grid-cols-3 p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
             <div class="w-full rounded">
               {rightImages.length >= 2 ? (
                 <img src={`/images/${rightImages[1]}`} alt="s" />
@@ -164,9 +146,9 @@ export default function HomeScreen() {
             ) : (
               <button
                 onClick={(e) => HandleClick(e)}
-                className="w-100% bg-blue-500 col-span-3 text-3xl m-12 hover:bg-blue-600"
+                className="w-100% text-white bg-blue-500 col-span-3 text-3xl px-3 py-4 my-6 hover:bg-blue-600 rounded"
               >
-                Book
+                Book Now
               </button>
             )}
           </div>
@@ -180,9 +162,7 @@ function SingleLargeComponent(e) {
   return (
     <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
       <Rating />
-
       <img className="h-3/4 p-2" src={`/images/${e.images[0]}`} />
-
       <div class="px-2  py-1">
         <p class=" text-md font-bold mb-2">{e.name}</p>
         <div class="flex flex-row ">

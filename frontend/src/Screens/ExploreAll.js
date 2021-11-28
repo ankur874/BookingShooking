@@ -56,7 +56,6 @@ export default function ExploreAll() {
         <div className="col-start-1 col-end-1">
           <SideBar></SideBar>
         </div>
-
         <div className="col-start-2 col-span-7">
           <div>
             <header className="flex  flex-row justify-evenly   py-2">
@@ -177,7 +176,7 @@ export default function ExploreAll() {
   // }
   function singleComponent(id, e) {
     return (
-      <Link to={`/explore/${id}`}>
+      <Link to={`/hoteloverview/${e._id}`}>
         <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
           <Rating />
           <img
