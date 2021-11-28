@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
 // import Rating from "../components/Rating";
-import TabsRender from "../components/Tabs";
+import TabsRender from "../Components/Tabs";
 // import "./HomeScreen.css";
 import SideBar from "./SideBar";
-import Rating from "../components/Rating";
+import Rating from "../Components/Rating";
 
 export default function HomeScreen() {
   let [rightName, setRightName] = useState("");

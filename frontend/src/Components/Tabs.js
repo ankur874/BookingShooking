@@ -10,7 +10,9 @@ const Tabs = (props) => {
               className="flex mb-0 list-none flex-wrap  pb-4 flex-row"
               role="tablist"
             >
+
               <li className="-mb-px mx-2 last:mr-0 flex-auto text-center my-2 ">
+
                 <a
                   className={
                     "text-xs font-bold uppercase px-5 py-3  rounded block leading-normal " +
