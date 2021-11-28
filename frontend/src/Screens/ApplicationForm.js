@@ -46,13 +46,13 @@ const ApplicationFrom = () => {
   const coverpic = useRef(null);
   const profilepic = useRef(null);
   let form = useRef(null);
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // dispatch(
     //   createRestaurant()
-      
+
     // );
-    const { data } = await axios.post(`/api/restraunts/`,{
+    const { data } = await axios.post(`/api/restraunts/`, {
       name: resName,
       description: resDesc,
       location: resAddress,
@@ -64,15 +64,15 @@ const ApplicationFrom = () => {
       coordinates: [myLocation.latitude, myLocation.longitude],
       booked_by: [],
     });
-    console.log(data.data.restraunt._id,"dataaaaaaaaaaaaaa");
+    console.log(data.data.restraunt._id, "dataaaaaaaaaaaaaa");
     navigate(`/tableselector/${data.data.restraunt._id}`);
-    if ( data1.restaurants.data != null) {
-      
+    if (data1.restaurants.data != null) {
+
       // console.log(
       //       "data",
       //       data1.restaurants.data[da]._id
       //     );
-       
+
 
       // console.log("resid", data1.restaurants.data[data1.restaurants.data.length-1]._id);
     }
@@ -127,7 +127,7 @@ const ApplicationFrom = () => {
                   onChange={onCoverClick}
                   // onClick={}
                   ref={coverpic}
-                  // style={{ display: "hidden" }}
+                // style={{ display: "hidden" }}
                 />
                 {/* <button
                   type="file"
@@ -136,9 +136,9 @@ const ApplicationFrom = () => {
                 > */}
                 {/* Change Cover Photo */}
                 {/* </button> */}
-               
+
               </div>
-             
+
             </div>
             <div className="container mx-auto flex flex-row">
               <div className="mt-16 xl:w-1/2 lg:w-1/2 md:w-1/2 flex flex-col mb-6 pr-4">

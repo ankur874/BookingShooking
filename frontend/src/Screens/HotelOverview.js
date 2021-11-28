@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listRestaurants } from "../actions/restaurantActions";
-import Review from "../components/Review";
-import ProductReviewCard from "../components/ProductReview";
+import Review from "../Components/Review";
+import ProductReviewCard from "../Components/ProductReview";
 import { useNavigate, useParams } from "react-router";
 
 const HotelOverview = () => {
@@ -23,7 +23,6 @@ const HotelOverview = () => {
     let result = [];
     if (restaurants.data != null) {
         result = restaurants.data.filter((restaurant) => restaurant._id === id);
-        console.log(result, "sult");
     }
     function bookIt() {
         navigate(`/book/${id}`);
@@ -73,7 +72,7 @@ const HotelOverview = () => {
                         <img
                             className="mt-2 w-full rounded"
                             alt=""
-                            src={`/images/${result[0].images[0]}`}
+                            src={`/images/${result[0].images[1]}`}
                         />
                     </div>
                     <div className="xl:w-3/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">

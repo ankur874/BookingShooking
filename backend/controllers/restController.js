@@ -38,8 +38,10 @@ exports.getRestraunt = async (req, res, next) => {
     res.status(201).json({
       status: "Success",
       data: restraunt,
+
     });
   } catch (err) {
+    // console.log(err);
     res.status(500).json({
       status: "Failed",
     });

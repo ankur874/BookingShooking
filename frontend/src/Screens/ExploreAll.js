@@ -1,9 +1,7 @@
 import { useState } from "react";
-import Rating from "../components/Rating";
+import Rating from "../Components/Rating";
 import SideBar from "./SideBar";
 import ReactSearchBox from "react-search-box";
-import DropDown from "../components/dropdown";
-import Slider from "../components/slider";
 import { useDispatch, useSelector } from "react-redux";
 import { listRestaurants } from "../actions/restaurantActions";
 import { useEffect } from "react";

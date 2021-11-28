@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
 // import Rating from "../components/Rating";
-import TabsRender from "../components/Tabs";
+import TabsRender from "../Components/Tabs";
 // import "./HomeScreen.css";
 import SideBar from "./SideBar";
-import Rating from "../components/Rating";
+import Rating from "../Components/Rating";
 
 export default function HomeScreen() {
   let [rightName, setRightName] = useState("");
@@ -30,10 +30,12 @@ export default function HomeScreen() {
   let newarr = [];
   let newarr1 = [];
   if (restaurants.data != null) {
+
     console.log(
       data1.restaurants.data[data1.restaurants.data.length - 1].id,
       "resId"
     );
+
   }
   // console.log(userInfo, "vdfvdfv");
 
@@ -110,7 +112,7 @@ export default function HomeScreen() {
           </div>
         </div>
 
-        <div className="col-start-5 bg-white ml-4 col-end-7 flex  flex-col">
+        <div className=" col-start-5 bg-white ml-4 col-end-7 flex  flex-col ">
           <div className="flex flex-row items-center mb-2 justify-evenly bg-gray-700 p-8">
             <img
               class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
@@ -132,24 +134,22 @@ export default function HomeScreen() {
           <div className="h-1/2">
             <TabsRender facilities={rightFaci} desc={rightDesc}></TabsRender>
           </div>
-          <div class="grid-cols-3 bg-red-700 mx-auto p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
-            <div class=" w-full col-span-2 row-span-2   rounded">
-              <img src={`/images/${rightImages[0]}`} alt="s" />
-            </div>
 
-            {rightName == "" ? (
-              <div></div>
-            ) : (
-              <button
-                onClick={(e) => HandleClick(e)}
-                className="w-100% text-white bg-blue-500 col-span-3 text-3xl px-3 py-4 my-6 hover:bg-blue-600 rounded"
-              >
-                Book Now
-              </button>
-            )}
-          </div>
+          <img src={`/images/${rightImages[0]}`} alt="s" />
         </div>
+
+        {rightName == "" ? (
+          <div></div>
+        ) : (
+          <button
+            onClick={(e) => HandleClick(e)}
+            className="w-100% text-white bg-blue-500 col-span-3 text-3xl px-3 py-4 my-6 hover:bg-blue-600 rounded"
+          >
+            Book Now
+          </button>
+        )}
       </div>
+
     );
   }
 }
