@@ -59,8 +59,8 @@ const RoomEditor = () => {
             <div className=" absolute top-1  right-0 ">
               <img
                 className="transition duration-75 hover:shadow-md "
-                height="250"
-                width="250"
+                height="220"
+                width="220"
                 src={table_1}
               />
             </div>
@@ -73,8 +73,8 @@ const RoomEditor = () => {
             <div className=" absolute top-40  right-0    ">
               <img
                 className="transition duration-75 hover:shadow-md "
-                height="260"
-                width="260"
+                height="220"
+                width="220"
                 src={table_2}
               />
             </div>
@@ -87,8 +87,8 @@ const RoomEditor = () => {
             <div className=" absolute top-80  right-0   ">
               <img
                 className="transition duration-75 hover:shadow-md "
-                height="270"
-                width="270"
+                height="220"
+                width="220"
                 src={table_3}
               />
             </div>
@@ -101,8 +101,8 @@ const RoomEditor = () => {
             <div className=" absolute bottom-1  right-0  ">
               <img
                 className="transition duration-75 hover:shadow-md "
-                height="150"
-                width="150"
+                height="220"
+                width="220"
                 src={table_4}
               />
             </div>
