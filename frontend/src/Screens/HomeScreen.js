@@ -28,7 +28,7 @@ export default function HomeScreen() {
   const { userInfo, error } = userLogin;
 
   if (restaurants.data != null) {
-    console.log(data1.restaurants.data[0].id, "resId");
+    console.log(data1.restaurants.data[data1.restaurants.data.length-1].id, "resId");
   }
   // console.log(userInfo, "vdfvdfv");
 

@@ -46,31 +46,35 @@ const ApplicationFrom = () => {
   const coverpic = useRef(null);
   const profilepic = useRef(null);
   let form = useRef(null);
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    dispatch(
-      createRestaurant({
-        name: resName,
-        description: resDesc,
-        location: resAddress,
-        Dining_price: diningPrice,
-        Tables: 0,
-        rating: 4.5,
-        images: [coverPhoto],
-        reviews: [],
-        coordinates: [myLocation.latitude, myLocation.longitude],
-        booked_by: [],
-      })
-    );
+    // dispatch(
+    //   createRestaurant()
+      
+    // );
+    const { data } = await axios.post(`/api/restraunts/`,{
+      name: resName,
+      description: resDesc,
+      location: resAddress,
+      Dining_price: diningPrice,
+      Tables: 0,
+      rating: 4.5,
+      images: [coverPhoto],
+      reviews: [],
+      coordinates: [myLocation.latitude, myLocation.longitude],
+      booked_by: [],
+    });
+    console.log(data.data.restraunt._id,"dataaaaaaaaaaaaaa");
+    navigate(`/tableselector/${data.data.restraunt._id}`);
     if ( data1.restaurants.data != null) {
+      
       // console.log(
       //       "data",
       //       data1.restaurants.data[da]._id
       //     );
        
-      navigate(`/tableselector/${data1.restaurants.data[data1.restaurants.data.length-1]._id}`);
 
-      console.log("resid", data1.restaurants.data[data1.restaurants.data.length-1]._id);
+      // console.log("resid", data1.restaurants.data[data1.restaurants.data.length-1]._id);
     }
   };
   const onCoverClick = async (e) => {
