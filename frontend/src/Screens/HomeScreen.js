@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
 // import Rating from "../components/Rating";
-import TabsRender from "../Components/Tabs";
+import TabsRender from "../components/Tabs";
 // import "./HomeScreen.css";
 import SideBar from "./SideBar";
-import Rating from "../Components/Rating";
+import Rating from "../components/Rating";
 
 export default function HomeScreen() {
   let [rightName, setRightName] = useState("");
@@ -27,8 +27,13 @@ export default function HomeScreen() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, error } = userLogin;
 
+  let newarr = [];
+  let newarr1 = [];
   if (restaurants.data != null) {
-    console.log(data1.restaurants.data[data1.restaurants.data.length-1].id, "resId");
+    console.log(
+      data1.restaurants.data[data1.restaurants.data.length - 1].id,
+      "resId"
+    );
   }
   // console.log(userInfo, "vdfvdfv");
 
@@ -55,6 +60,10 @@ export default function HomeScreen() {
       </div>
     );
   } else {
+    newarr = restaurants.data;
+    newarr.splice(3);
+    newarr1 = restaurants.data;
+    newarr1.splice(4);
     console.log(restaurants.data, "afadfdsfsdf");
     return (
       <div class="grid sm:grid-cols-1 bg-gray-100 md:grid-cols-6 ">
@@ -71,7 +80,7 @@ export default function HomeScreen() {
             </div>
 
             <div className="mr-2 grid grid-cols-3  gap-5">
-              {restaurants.data.map((e) => {
+              {newarr.map((e) => {
                 return (
                   <div
                     onClick={(click) => changeRightDrawer(click, e)}
@@ -90,10 +99,13 @@ export default function HomeScreen() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {singleSmallComponent()}
-              {singleSmallComponent()}
-              {singleSmallComponent()}
-              {singleSmallComponent()}
+              {newarr1.map((e) => {
+                return (
+                  <div className="hover:scale-110">
+                    {singleSmallComponent(e)}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -120,27 +132,11 @@ export default function HomeScreen() {
           <div className="h-1/2">
             <TabsRender facilities={rightFaci} desc={rightDesc}></TabsRender>
           </div>
-          <div class="grid-cols-3 p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
-            <div class="w-full rounded">
-              {rightImages.length >= 2 ? (
-                <img src={`/images/${rightImages[1]}`} alt="s" />
-              ) : (
-                <div></div>
-              )}
-            </div>
-            <div class="w-full col-span-2 row-span-2 rounded">
+          <div class="grid-cols-3 bg-red-700 mx-auto p-2 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
+            <div class=" w-full col-span-2 row-span-2   rounded">
               <img src={`/images/${rightImages[0]}`} alt="s" />
             </div>
-            <div class="w-full rounded">
-              {rightImages.length >= 3 ? (
-                <img
-                  src="https://cdn.venuelook.com/uploads/space_16878/1547448955_595x400.png"
-                  alt="s"
-                />
-              ) : (
-                <div></div>
-              )}
-            </div>
+
             {rightName == "" ? (
               <div></div>
             ) : (
@@ -182,7 +178,7 @@ function SingleLargeComponent(e) {
     </div>
   );
 }
-function singleSmallComponent() {
+function singleSmallComponent(e) {
   return (
     <div
       id="app"
@@ -192,14 +188,14 @@ function singleSmallComponent() {
       <img
         alt="Room "
         className="w-2/5 p-1 h-full rounded-lg transition-all duration-75  transform  hover:scale-110"
-        src="https://www.amritsruae.com/blog/wp-content/uploads/2019/12/Amritsr-Dubai-2.jpg"
+        src={`/images/${e.images[0]}`}
       />
       <div class="w-full flex flex-col">
         <div class="p-4 pb-0 flex-1">
-          <h3 class="font-light mb-1 text-grey-darkest">Tower Hotel</h3>
+          <h3 class="font-light mb-1 text-grey-darkest">{e.name}</h3>
           <div class="text-xs flex items-center mb-4">
             <i class="fas fa-map-marker-alt mr-1 text-grey-dark"></i>
-            Soho, London
+            {e.location}
           </div>
         </div>
       </div>

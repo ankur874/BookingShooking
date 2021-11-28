@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actions from '../constants/userConstants';
+import {API} from '../backend';
 
 export const login = (email, password) => async (dispatch) => {
   try {
