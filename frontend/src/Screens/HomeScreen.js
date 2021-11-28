@@ -19,21 +19,13 @@ export default function HomeScreen() {
   // let rightImages = [];
 
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.hotelList);
   const data1 = useSelector((state) => state.restaurantList);
-
-  const { hotels, loading } = data;
   const { restaurants, loading1 } = data1;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, error } = userLogin;
 
-  if (restaurants.data != null) {
-    console.log(data1.restaurants.data[data1.restaurants.data.length-1].id, "resId");
-  }
-  // console.log(userInfo, "vdfvdfv");
-
   useEffect(() => {
-    dispatch(listHotels());
+
     dispatch(listRestaurants());
   }, [dispatch]);
   function changeRightDrawer(click, e) {
@@ -48,7 +40,7 @@ export default function HomeScreen() {
   function HandleClick(e) {
     navigate(`/hoteloverview/${openId}`);
   }
-  if (hotels.data == null || restaurants.data == null) {
+  if ( restaurants.data == null) {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
         <img height="200" src="loading.gif" alt="some" />

@@ -47,11 +47,7 @@ export default function ExploreMap() {
   if (restaurants.data == null) {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
-        <img
-          height="200"
-          src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"
-          alt="some"
-        />
+        <img height="200" src="loading.gif" alt="some" />
       </div>
     );
   } else {
@@ -114,7 +110,7 @@ export default function ExploreMap() {
                     width={viewport.zoom * 5}
                     height={viewport.zoom * 5}
                   >
-                    <i class="fas fa-map-marker"></i>
+                   <i className="text-sm fas fa-concierge-bell"></i>
                   </Marker>
                   )
                 </div>
