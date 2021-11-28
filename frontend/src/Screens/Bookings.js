@@ -35,7 +35,7 @@ function Bookings() {
     }
   };
 
-  if (people.length <= 1) {
+  if (people.length < 1) {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
         <img height="200" src="loading.gif" alt="some" />
