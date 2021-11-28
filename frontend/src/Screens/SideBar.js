@@ -213,7 +213,7 @@ export default function SideBar() {
               href="/form"
             >
               <i class="fas fa-briefcase"></i>
-              <span class="ml-2 text-sm font-medium">Make Res Listed</span>
+              <span class="ml-2 text-sm font-medium">Make Me Listed</span>
             </a>
 
             {userInfo == null ? (
@@ -222,7 +222,7 @@ export default function SideBar() {
                   class="flex items-center justify-center  w-full h-24 mt-1 bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
                   href="/login"
                 >
-                  <i class="fas fa-briefcase"></i>
+                  <i class="fas fa-lock"></i>
                   <span class="ml-2 text-sm font-medium">Login</span>
                 </a>
                 {/* <a
@@ -239,7 +239,7 @@ export default function SideBar() {
                 class="flex items-center justify-center  w-full h-24 mt-1 bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
                 href="/logout"
               >
-                <i class="fas fa-briefcase"></i>
+                <i class="fas fa-sign-out-alt"></i>
                 <span class="ml-2 text-sm font-medium">Log out</span>
               </button>
             )}
