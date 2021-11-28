@@ -10,7 +10,7 @@ export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, userInfo, error } = userLogin;
+  const { userInfo, error } = userLogin;
   console.log("error", error);
   const navigate = useNavigate();
   console.log("fssfg", userLogin);

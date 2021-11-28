@@ -80,6 +80,7 @@ exports.addReview = async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       status: "Failed",
     });
@@ -97,6 +98,7 @@ exports.bookRestaurant = async (req, res, next) => {
       data: user,
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json({
       status: "Failed",
     });

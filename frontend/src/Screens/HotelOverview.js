@@ -1,55 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
-import axios from "axios";
-import StripeCheckout from "react-stripe-checkout";
-import { toast } from "react-toastify";
 import Review from "../Components/Review";
 import ProductReviewCard from "../Components/ProductReview";
 import { useNavigate, useParams } from "react-router";
-import Book from "./Book";
 
 const HotelOverview = () => {
-    const [res, setRes] = useState({});
-    const handleToken = async (token, addresses) => {
-        const response = await axios.post("/checkout", { token });
 
-        const { status } = response.data;
-        console.log("Response:", response.data);
-        if (status === "success") {
-            toast("Success! Check email for details", { type: "success" });
-        } else {
-            toast("Something went wrong", { type: "error" });
-        }
-    };
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const data1 = useSelector((state) => state.restaurantList);
 
-    const userLogin = useSelector((state) => state.userLogin);
-    const { userInfo, error } = userLogin;
+    // const userLogin = useSelector((state) => state.userLogin);
+    // const { userInfo, error } = userLogin;
     useEffect(() => {
         dispatch(listRestaurants());
     }, [dispatch]);
-    const { restaurants, loading1 } = data1;
+    const { restaurants } = data1;
     // console.log(restaurants.data, "ssssssssssssssssss");
     const { id } = useParams();
     let result = [];
     if (restaurants.data != null) {
-        result = restaurants.data.filter((restaurant) => restaurant._id == id);
+        result = restaurants.data.filter((restaurant) => restaurant._id === id);
         console.log(result, "result");
     }
     function bookIt() {
         navigate(`/book/${id}`);
     }
-    if (result.length == 0) {
+    if (result.length === 0) {
         return (
             <div className="h-screen flex flex-col items-center justify-center">
                 <img
                     height="200"
-                    src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Youtube_loading_symbol_1_(wobbly).gif"
+                    src="https://i.gifer.com/4V0b.gif"
                     alt="some"
                 />
             </div>
@@ -273,23 +257,20 @@ const HotelOverview = () => {
                     </div>
                 </div>
 
-                <Review type="restaurant" id={id} />
 
                 {/* adding the reviews extracted before */}
+                <div className="grid grid-cols-3">
+                    {result[0].reviews.map((rev) => (
+                        <div class="grid grid-cols-1 md:grid-cols-6 m-10 gap-4 shadow-lg">
+                            <div class="col-span-2">
+                                <ProductReviewCard review={rev} />
+                            </div>
 
-                {result.length > 0 && result[0].reviews.length >= 3 && (
-                    <div class="grid grid-cols-1 md:grid-cols-6 m-10 gap-4">
-                        <div class="col-span-2">
-                            <ProductReviewCard />
                         </div>
-                        <div class="col-span-2">
-                            <ProductReviewCard />
-                        </div>
-                        <div class="col-span-2">
-                            <ProductReviewCard />
-                        </div>
-                    </div>
-                )}
+                    ))}
+                </div>
+
+                <Review type="restaurant" id={id} />
             </>
         );
     }
