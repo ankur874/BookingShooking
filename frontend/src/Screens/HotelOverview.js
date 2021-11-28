@@ -23,7 +23,7 @@ const HotelOverview = () => {
     let result = [];
     if (restaurants.data != null) {
         result = restaurants.data.filter((restaurant) => restaurant._id === id);
-        console.log(result, "result");
+        console.log(result[0].images, "result");
     }
     function bookIt() {
         navigate(`/book/${id}`);
@@ -73,7 +73,7 @@ const HotelOverview = () => {
                         <img
                             className="mt-2 w-full rounded"
                             alt=""
-                            src={`/images/${result[0].images[0]}`}
+                            src={`/images/${result[0].images[1]}`}
                         />
                     </div>
                     <div className="xl:w-3/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">

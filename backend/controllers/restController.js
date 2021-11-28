@@ -37,11 +37,11 @@ exports.getRestraunt = async (req, res, next) => {
     const restraunt = await Restraunt.findById(req.params.id);
     res.status(201).json({
       status: "Success",
-      data: {
-        restraunt: restraunt,
-      },
+      data: restraunt,
+
     });
   } catch (err) {
+    // console.log(err);
     res.status(500).json({
       status: "Failed",
     });
