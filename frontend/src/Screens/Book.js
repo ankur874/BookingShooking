@@ -1,8 +1,9 @@
 import React from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { listRestaurants } from "../actions/restaurantActions";
 import { useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import table_1 from "../img/table_1.png";
 import table_2 from "../img/table_2.png";
 import table_3 from "../img/table_3.png";
@@ -11,20 +12,25 @@ import table_4 from "../img/table_4.png";
 export default function Book() {
   const dispatch = useDispatch();
   const data1 = useSelector((state) => state.restaurantList);
-
+  const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo, error } = userLogin;
+  const { userInfo } = userLogin;
   useEffect(() => {
     dispatch(listRestaurants());
   }, [dispatch]);
-  const { restaurants, loading1 } = data1;
+  const { restaurants } = data1;
   const { id } = useParams();
   let result = [];
   if (restaurants.data != null) {
-    result = restaurants.data.filter((restaurant) => restaurant._id == id);
+    result = restaurants.data.filter((restaurant) => restaurant._id === id);
     console.log(result, "result");
   }
-  if (result.length == 0) {
+  const handleBooking = async () => {
+    await axios.post(`/api/restraunts/book/${userInfo._id}`, { restaurantId: result[0]._id })
+    navigate("/")
+  }
+
+  if (result.length === 0) {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
         <img
@@ -45,44 +51,52 @@ export default function Book() {
               left: e.xCoordinate,
             }}
           >
-            {e.tableType == 1 && (
+            {e.tableType === 1 && (
               <div
                 style={{ border: "1px solid #F3F4F6" }}
                 className="shadow-md "
               >
-                <img height="220" width="220" src={table_1} />
-              
+                <img height="220" width="220" src={table_1} alt="some" />
+                <div className="rounded-full bg-yellow-300"> </div>
+
               </div>
             )}
-            {e.tableType == 2 && (
+            {e.tableType === 2 && (
               <div
                 style={{ border: "1px solid #F3F4F6" }}
                 className="shadow-md "
               >
-                <img height="220" width="220" src={table_2} />
-                
+                <img height="220" width="220" src={table_2} alt="some" />
+                <div className="rounded-full bg-yellow-300"> </div>
+
               </div>
             )}
-            {e.tableType == 3 && (
+            {e.tableType === 3 && (
               <div
                 style={{ border: "1px solid #F3F4F6" }}
                 className=" shadow-md "
               >
-                <img height="220" width="220" src={table_3} />
-             
+                <img height="220" width="220" src={table_3} alt="some" />
+                <div className="rounded-full bg-yellow-300"> </div>
               </div>
             )}
-            {e.tableType == 4 && (
+            {e.tableType === 4 && (
               <div
+
+
                 style={{ border: "1px solid #F3F4F6" }}
                 className=" shadow-md "
               >
-                <img height="220" width="220" src={table_4} />
+
+                <img height="220" width="220" src={table_4} alt="some" />
+                <div className="rounded-full bg-yellow-300"> </div>
+
               </div>
             )}
           </div>
         ))}
-        {/*   style={{ border: "1px solid #F3F4F6" }} <button className='absolute bg-purple-800 text-white text-semibold rounded-sm shadow-sm hover:bg-purple-900  hover:-translate-y-1 transform p-2'>Book</button> */}
+        <button onClick={() => handleBooking()} className='absolute bg-purple-800 text-white text-semibold rounded-sm shadow-sm hover:bg-purple-900  hover:-translate-y-1 transform p-2'>Book</button>
+
       </div>
     );
   }

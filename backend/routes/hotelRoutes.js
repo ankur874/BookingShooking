@@ -11,4 +11,6 @@ router.route("/update/:id").post(hotelController.addReview);
 
 router.route("/:id").get(hotelController.getHotel);
 
+router.route("/book/:id").post(hotelController.bookHotel);
+
 module.exports = router;

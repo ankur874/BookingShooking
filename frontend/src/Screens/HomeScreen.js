@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { listHotels } from "../actions/hotelActions";
 import { listRestaurants } from "../actions/restaurantActions";
 // import Rating from "../components/Rating";
-import TabsRender from "../components/Tabs";
+import TabsRender from "../Components/Tabs";
 // import "./HomeScreen.css";
 import SideBar from "./SideBar";
-import Rating from "../components/Rating";
+import Rating from "../Components/Rating";
 
 export default function HomeScreen() {
   let [rightName, setRightName] = useState("");
@@ -188,7 +188,9 @@ function SingleLargeComponent(e) {
   return (
     <div class="max-w-sm bg-white relative  h-56 flex flex-col justify-between rounded-sm transition-all duration-75 hover:shadow-md shadow-sm  transform hover:-translate-y-1 hover:scale-110  ">
       <Rating />
+
       <img className="h-3/4 p-2" src={`/images/${e.images[0]}`} />
+
       <div class="px-2  py-1">
         <p class=" text-md font-bold mb-2">{e.name}</p>
         <div class="flex flex-row ">

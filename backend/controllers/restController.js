@@ -1,4 +1,5 @@
 const Restraunt = require("../models/restrauntModels");
+const User = require("../models/userModel");
 
 exports.createRestraunt = async (req, res, next) => {
   try {
@@ -10,6 +11,7 @@ exports.createRestraunt = async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       status: "Failed",
     });
@@ -70,7 +72,7 @@ exports.addReview = async (req, res, next) => {
     const restraunt = await Restraunt.findById(req.params.id);
     restraunt.reviews.push(req.body);
     restraunt.save();
-    
+
     res.status(201).json({
       status: "Success",
       data: {
@@ -78,8 +80,27 @@ exports.addReview = async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       status: "Failed",
     });
   }
 };
+
+exports.bookRestaurant = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.restaurants.push(req.body.restaurantId);
+    user.save();
+
+    res.status(201).json({
+      status: "Success",
+      data: user,
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({
+      status: "Failed",
+    });
+  }
+}
