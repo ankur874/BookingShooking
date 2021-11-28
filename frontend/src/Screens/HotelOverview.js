@@ -23,7 +23,7 @@ const HotelOverview = () => {
     let result = [];
     if (restaurants.data != null) {
         result = restaurants.data.filter((restaurant) => restaurant._id === id);
-        console.log(result, "result");
+        console.log(result, "sult");
     }
     function bookIt() {
         navigate(`/book/${id}`);
