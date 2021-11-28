@@ -10,7 +10,9 @@ const Tabs = (props) => {
               className="flex mb-0 list-none flex-wrap  pb-4 flex-row"
               role="tablist"
             >
-              <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+
+              <li className="-mb-px mx-2 last:mr-0 flex-auto text-center my-2 ">
+
                 <a
                   className={
                     "text-xs font-bold uppercase px-5 py-3  rounded block leading-normal " +
@@ -32,9 +34,9 @@ const Tabs = (props) => {
             
             
             </ul>
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded">
-              <div className="px-4 py-5 flex-auto">
-                <div className="tab-content tab-space">
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+              <div className="px-4 py-2 flex-auto">
+                <div className="tab-content tab-space text-xl">
                   <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                     <p>
                       {props.props.desc}

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import * as actions from '../constants/restuarantConstants';
+import {API} from '../backend';
 
 const listRestaurants = () => async (dispatch) => {
   try {
     dispatch({ type: actions.RESTAURANT_LIST_REQUEST });
 
     const { data } = await axios.get(`/api/restraunts/`);
+    console.log("daaaaaaa",data);
 
     dispatch({
       type: actions.RESTAURANT_LIST_SUCCESS,

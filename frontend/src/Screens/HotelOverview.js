@@ -23,7 +23,6 @@ const HotelOverview = () => {
     let result = [];
     if (restaurants.data != null) {
         result = restaurants.data.filter((restaurant) => restaurant._id === id);
-        console.log(result[0].images, "result");
     }
     function bookIt() {
         navigate(`/book/${id}`);
@@ -98,6 +97,29 @@ const HotelOverview = () => {
                                 style={{ alignSelf: "flex-end" }}
                             >
                                 {result[0].description}
+                            </p>
+                        </div>
+                        <div className="mt-4 pb-2">
+                            <h1
+                                className="
+							lg:text-2xl
+							text-xl
+							font-semibold
+							lg:leading-6
+							leading-7
+							text-gray-800
+							mt-1
+						"
+                            >
+                                Price Per Table
+                            </h1>
+                        </div>
+                        <div>
+                            <p
+                                className="xl:pr-20 text-base leading-normal mt-4 text-gray-600 "
+                                style={{ alignSelf: "flex-end" }}
+                            >
+                                {result[0].Dining_price}
                             </p>
                         </div>
                         <div className="pb-2 mt-12">

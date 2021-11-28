@@ -5,6 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { listRestaurants } from "../actions/restaurantActions";
 
 export default function ExploreMap() {
+  const [img, setImg] = useState("");
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [desc, setDesc] = useState("");
+
   const [modalStyle, setModalStyle] = useState(false);
   const [myLocation, setMyLocation] = useState({
     latitude: 10.850516,
@@ -42,11 +47,7 @@ export default function ExploreMap() {
   if (restaurants.data == null) {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
-        <img
-          height="200"
-          src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif"
-          alt="some"
-        />
+        <img height="200" src="loading.gif" alt="some" />
       </div>
     );
   } else {
@@ -64,45 +65,44 @@ export default function ExploreMap() {
             {...viewport}
             onViewportChange={(viewport) => setViewport(viewport)}
           >
-            {
-              restaurants.data.map((e)=>  {return <>
-              {(
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "13rem",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  className="bg-gray-700 p-2 text-gray-100 rounded-lg"
-                >
-                  <img
-                    className="object-cover w-24 h-24  rounded-full shadow"
-                    src="https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                    alt="Person"
-                  />
-                  <div className="flex flex-col justify-center mt-2">
-                    <p className="text-lg font-bold">{e.name}</p>
-                    <p className="mb-4 text-xs text-gray-300">
-                    {e.location}
-                    </p>
-                    <p className="text-sm tracking-wide text-gray-200">
-                      {e.description}
-                    </p>
-                  </div>
-                </div>
-              ) 
-                }
+            {modalStyle ? (
               <div
-                onMouseEnter={() => {
-                   return setModalStyle(true);
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "13rem",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-                onMouseLeave={() => {
-                   return setModalStyle(false);
-                }}
+                className="bg-gray-900 p-2 text-gray-100 rounded-lg"
               >
-                
+                <img
+                  className="object-cover w-24 h-24  rounded-full shadow"
+                  src="https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                  alt="Person"
+                />
+                <div className="flex flex-col justify-center mt-2">
+                  <p className="text-lg font-bold">{name}</p>
+                  <p className="mb-4 text-xs text-gray-300">{location}</p>
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
+            <>
+              {restaurants.data.map((e) => (
+                <div
+                  onMouseEnter={() => {
+                    setImg(e.images[0]);
+                    setName(e.name);
+                    setLocation(e.location);
+                    setModalStyle(true);
+                  }}
+                  onMouseLeave={() => {
+                    setModalStyle(false);
+                  }}
+                >
                   <Marker
                     className="transition-all duration-75 hover:shadow-md  transform  hover:scale-110 "
                     latitude={e.coordinates[0]}
@@ -110,13 +110,12 @@ export default function ExploreMap() {
                     width={viewport.zoom * 5}
                     height={viewport.zoom * 5}
                   >
-                    <i class="fas fa-map-marker"></i>
+                   <i className="text-sm fas fa-concierge-bell"></i>
                   </Marker>
-                )
-              </div>
-            </>})
-            }
-         
+                  )
+                </div>
+              ))}
+            </>
           </ReactMapGL>
         </div>
       </div>

@@ -66,7 +66,6 @@ exports.updateRestraunt = async (req, res, next) => {
   }
 };
 
-
 exports.addReview = async (req, res, next) => {
   try {
     const restraunt = await Restraunt.findById(req.params.id);
@@ -98,9 +97,9 @@ exports.bookRestaurant = async (req, res, next) => {
       data: user,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({
       status: "Failed",
     });
   }
-}
+};

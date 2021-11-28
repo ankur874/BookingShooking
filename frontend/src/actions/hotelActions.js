@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actions from '../constants/hotelConstants';
+import {API} from '../backend';
 
 const listHotels = () => async (dispatch) => {
   try {

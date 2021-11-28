@@ -15,6 +15,7 @@ import ApplicationFrom from "./Screens/ApplicationForm";
 import HotelOverview from "./Screens/HotelOverview";
 import Decider from "./Screens/decider";
 import Book from "./Screens/Book";
+import ThankYou from "./Screens/ThankYou";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/form" element={<ApplicationFrom />} />
           <Route path="/hoteloverview/:id" element={<HotelOverview />} />
           <Route path="/book/:id" element={<Book />} />
+          <Route path="/thankyou" element={<ThankYou/>} />
         </Routes>
       </Router>
     </>
